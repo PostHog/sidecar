@@ -84,12 +84,16 @@ const Person: React.FC<{ person: PersonData }> = ({ person }) => {
           { headers: { Authorization: `Bearer ${user.apiKey}` } }
         )
           .then((res) => res.json())
-          .then((data) => setRecordings(data.results));
+          .then((data) => setRecordings(data.results))
+          .catch((err) => {
+            setRecordings([]);
+            console.error(err);
+          });
       }
 
       if (!featureFlags) {
         fetch(
-          `${user.url}/api/projects/@current/feature_flags/evaluation_reasons?distinct_id=${person.distinct_ids[0]}`,
+          `${user.url}/api/projects/@current/feature_flags/evaluation_reasons?distinct_id=${person.distinct_ids[0]}&limit=15`,
           { headers: { Authorization: `Bearer ${user.apiKey}` } }
         )
           .then((res) => res.json())
@@ -102,7 +106,11 @@ const Person: React.FC<{ person: PersonData }> = ({ person }) => {
           { headers: { Authorization: `Bearer ${user.apiKey}` } }
         )
           .then((res) => res.json())
-          .then((data) => setEvents(data.results));
+          .then((data) => setEvents(data.results))
+          .catch((err) => {
+            setEvents([]);
+            console.error(err);
+          });
       }
 
       if (groups === undefined) {
@@ -193,7 +201,11 @@ const Person: React.FC<{ person: PersonData }> = ({ person }) => {
           <Tab.Panels>
             <Tab.Panel as="div" className="space-y-2">
               <Section>
-                <Header link="#">Recordings</Header>
+                <Header
+                  link={`${user.url}/person/${person.distinct_ids[0]}#activeTab=sessionRecordings`}
+                >
+                  Recordings
+                </Header>
                 <List loading={recordings === undefined}>
                   {recordings?.map((recording) => {
                     const formattedDuration = colonDelimitedDuration(
@@ -335,7 +347,10 @@ const Person: React.FC<{ person: PersonData }> = ({ person }) => {
             </Tab.Panel>
 
             <Tab.Panel>
-              <FeatureFlags featureFlags={featureFlags} />
+              <FeatureFlags
+                featureFlags={featureFlags}
+                distinctId={person.distinct_ids[0]}
+              />
             </Tab.Panel>
           </Tab.Panels>
         </Tab.Group>

@@ -4,6 +4,8 @@ import List from "./List";
 import ListItem from "./ListItem";
 import Link from "./Link";
 
+import { useUser } from "./UserProvider";
+
 export type FeatureFlagsData = Record<
   string,
   {
@@ -16,8 +18,11 @@ export type FeatureFlagsData = Record<
 >;
 
 const FeatureFlags: React.FC<{
+  distinctId: string;
   featureFlags: FeatureFlagsData | undefined;
-}> = ({ featureFlags }) => {
+}> = ({ distinctId, featureFlags }) => {
+  const { user } = useUser();
+
   const displayFeatureFlagValue = (flag: FeatureFlagsData[string]) => {
     return typeof flag.value === "boolean"
       ? JSON.stringify(flag.value)
@@ -26,7 +31,9 @@ const FeatureFlags: React.FC<{
 
   return (
     <Section>
-      <Header link="#">Feature flags</Header>
+      <Header link={`${user?.url}/person/${distinctId}#activeTab=featureFlags`}>
+        Feature flags
+      </Header>
       {featureFlags ? (
         <List>
           {Object.entries(featureFlags)
@@ -34,7 +41,11 @@ const FeatureFlags: React.FC<{
             .map(([key, value]) => {
               return (
                 <ListItem key={key} flag>
-                  <Link to="#" flag external>
+                  <Link
+                    to={`${user?.url}/person/${distinctId}#activeTab=featureFlags`}
+                    flag
+                    external
+                  >
                     <div className="w-full flex items-center justify-between">
                       <span className="block">{key}</span>
                       <span className="block text-gray-800 bg-gray-100 py-0.5 px-1 rounded font-code text-xs">
