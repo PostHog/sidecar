@@ -22,10 +22,12 @@ const createPanel = (query) => {
     frame.style.height = "100%";
     frame.style.border = "";
     frame.style.zIndex = 99999;
+    document.body.style = "margin-right: 425px";
 
     const removeFrame = () => {
       document.body.removeChild(frame);
       document.body.removeEventListener("click", removeFrame);
+      document.body.style = "margin-right: unset";
     };
 
     document.body.addEventListener("click", removeFrame);
