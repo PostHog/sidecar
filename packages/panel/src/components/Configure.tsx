@@ -134,9 +134,9 @@ const Configure: React.FC<ConfigureProps> = ({ next }) => {
 
         <button
           type="submit"
-          className="bg-primary rounded w-full py-2 text-white text-[15px] disabled:bg-blue-200 mt-10 font-bold box-border"
+          className="bg-primary rounded w-full py-2 text-white text-[15px] disabled:bg-blue-200 mt-10 font-bold box-border relative hover:scale-[1.005] active:top-[0.5px] active:scale-[1]"
         >
-          Save & launch PostHog Sidecar &nbsp;🚀
+          Save &amp; launch PostHog Sidecar &nbsp;🚀
         </button>
       </form>
     </div>

@@ -68,7 +68,7 @@ const Persons: React.FC<PersonsProps> = (props) => {
         <div className="flex justify-between items-center space-x-2 mb-2">
           <div className="flex items-center space-x-2">
             <span className="w-7 h-7 flex items-center">
-              <Logomark />
+              <PostHogLogomark />
             </span>
             <span className="font-semibold opacity-75 text-sm">
               <CurrentProject />
