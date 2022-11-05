@@ -70,15 +70,17 @@ const Person: React.FC<{ person: PersonData }> = ({ person }) => {
   const [featureFlags, setFeatureFlags] = useState<
     FeatureFlagsData | undefined
   >(undefined);
-  const [recordings, setRecordings] = useState<Recording[]>([]);
-  const [events, setEvents] = useState<Event[]>([]);
-  const [groups, setGroups] = useState<Group[]>([]);
+  const [recordings, setRecordings] = useState<Recording[] | undefined>(
+    undefined
+  );
+  const [events, setEvents] = useState<Event[] | undefined>(undefined);
+  const [groups, setGroups] = useState<Group[] | undefined>(undefined);
 
   useEffect(() => {
     if (expanded && user) {
-      if (!recordings.length) {
+      if (recordings === undefined) {
         fetch(
-          `${user.url}/api/projects/@current/session_recordings?person_uuid=${person.uuid}&limit=10`,
+          `${user.url}/api/projects/@current/session_recordings?person_uuid=${person.uuid}&limit=6`,
           { headers: { Authorization: `Bearer ${user.apiKey}` } }
         )
           .then((res) => res.json())
@@ -94,7 +96,7 @@ const Person: React.FC<{ person: PersonData }> = ({ person }) => {
           .then((data) => setFeatureFlags(data));
       }
 
-      if (!events.length) {
+      if (events === undefined) {
         fetch(
           `${user.url}/api/projects/@current/events?person_id=${person.id}&orderBy=["-timestamp"]&limit=10`,
           { headers: { Authorization: `Bearer ${user.apiKey}` } }
@@ -103,7 +105,7 @@ const Person: React.FC<{ person: PersonData }> = ({ person }) => {
           .then((data) => setEvents(data.results));
       }
 
-      if (!groups.length) {
+      if (groups === undefined) {
         fetch(`${user.url}/api/projects/@current/groups_types`, {
           headers: { Authorization: `Bearer ${user.apiKey}` },
         })
@@ -158,18 +160,20 @@ const Person: React.FC<{ person: PersonData }> = ({ person }) => {
 
           <div className="text-xs opacity-40 text-black">
             First seen:{" "}
-            <time className="text-gray-800" dateTime={person.created_at}>{humanFriendlyDetailedTime(
-              person.created_at,
-              "MMMM DD, YYYY",
-              "h:mm A"
-            )}</time>
+            <time className="text-gray-800" dateTime={person.created_at}>
+              {humanFriendlyDetailedTime(
+                person.created_at,
+                "MMMM DD, YYYY",
+                "h:mm A"
+              )}
+            </time>
           </div>
         </div>
       </div>
 
       {expanded && (
         <Tab.Group>
-          <Tab.List className="grid grid-cols-3 items-center border-b mx-2 mb-1 space-x-[2px]">
+          <Tab.List className="grid grid-cols-3 items-center border-b mx-2 mb-2 space-x-[2px]">
             {tabs.map((tab) => (
               <Tab key={tab} as={React.Fragment}>
                 {({ selected }) => (
@@ -190,66 +194,64 @@ const Person: React.FC<{ person: PersonData }> = ({ person }) => {
             <Tab.Panel as="div" className="space-y-2">
               <Section>
                 <Header link="#">Recordings</Header>
-                {recordings.length ? (
-                  <List>
-                    {recordings.map((recording) => {
-                      const formattedDuration = colonDelimitedDuration(
-                        recording.recording_duration
-                      );
+                <List loading={recordings === undefined}>
+                  {recordings?.map((recording) => {
+                    const formattedDuration = colonDelimitedDuration(
+                      recording.recording_duration
+                    );
 
-                      return (
-                        <ListItem key={recording.id} recording>
-                          <Link
-                            to={`${user.url}/person/${person.distinct_ids[0]}#activeTab=sessionRecordings&sessionRecordingId=${recording.id}`}
-                            recording
-                            external
-                          >
-                            <div className="w-full flex items-center justify-between">
-                              <span>
-                                {humanFriendlyDetailedTime(
-                                  recording.start_time,
-                                  "MMMM DD, YYYY",
-                                  "h:mm A"
-                                )}
-                                <span className="hidden leading-none group-hover:inline-block -rotate-45 opacity-50 px-1 py-0.5">→</span>
+                    return (
+                      <ListItem key={recording.id} recording>
+                        <Link
+                          to={`${user.url}/person/${person.distinct_ids[0]}#activeTab=sessionRecordings&sessionRecordingId=${recording.id}`}
+                          recording
+                          external
+                        >
+                          <div className="w-full flex items-center justify-between">
+                            <span>
+                              {humanFriendlyDetailedTime(
+                                recording.start_time,
+                                "MMMM DD, YYYY",
+                                "h:mm A"
+                              )}
+                              <span className="hidden leading-none group-hover:inline-block -rotate-45 opacity-50 px-1 py-0.5">
+                                →
                               </span>
+                            </span>
 
-                              <span className="block text-gray-800 text-xs">
-                                {formattedDuration}
-                              </span>
-                            </div>
-                          </Link>
-                        </ListItem>
-                      );
-                    })}
-                  </List>
-                ) : null}
+                            <span className="block text-gray-800 text-xs">
+                              {formattedDuration}
+                            </span>
+                          </div>
+                        </Link>
+                      </ListItem>
+                    );
+                  })}
+                </List>
               </Section>
 
               <Section>
                 <Header>Events</Header>
-                {events.length ? (
-                  <List>
-                    {events.map((event) => {
-                      return (
-                        <ListItem key={event.id} event>
-                          <Event>
-                            <div className="w-full flex items-center justify-between">
-                              <span className="font-code">{event.event}</span>
-                              <span>
-                                {humanFriendlyDetailedTime(
-                                  event.timestamp,
-                                  "MMMM DD, YYYY",
-                                  "h:mm A"
-                                )}
-                              </span>
-                            </div>
-                          </Event>
-                        </ListItem>
-                      );
-                    })}
-                  </List>
-                ) : null}
+                <List loading={events === undefined}>
+                  {events?.map((event) => {
+                    return (
+                      <ListItem key={event.id} event>
+                        <Event>
+                          <div className="w-full flex items-center justify-between">
+                            <span className="font-code">{event.event}</span>
+                            <span>
+                              {humanFriendlyDetailedTime(
+                                event.timestamp,
+                                "MMMM DD, YYYY",
+                                "h:mm A"
+                              )}
+                            </span>
+                          </div>
+                        </Event>
+                      </ListItem>
+                    );
+                  })}
+                </List>
               </Section>
             </Tab.Panel>
 
@@ -277,7 +279,7 @@ const Person: React.FC<{ person: PersonData }> = ({ person }) => {
               </Section>
 
               <div className="py-2 space-y-2">
-                {groups.map((group) => {
+                {groups?.map((group) => {
                   return (
                     <Section key={group.id}>
                       <Header>
