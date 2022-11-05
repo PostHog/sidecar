@@ -1,7 +1,7 @@
 import cntl from "cntl";
 
 const baseLinkStyles = cntl`
-  text-blue-500
+  text-primary
 `;
 
 const rowLinkStyles = cntl`
