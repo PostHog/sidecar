@@ -14,7 +14,7 @@ import Event from "./Event";
 import { Tab } from "@headlessui/react";
 
 import { useUser } from "./UserProvider";
-import { humanFriendlyDetailedTime } from "../utils";
+import { colonDelimitedDuration, humanFriendlyDetailedTime } from "../utils";
 import React from "react";
 
 export type PersonData = {
@@ -53,6 +53,7 @@ export type Event = {
   event: string;
   id: string;
   properties: Record<string, any>;
+  timestamp: string;
 };
 
 const tabs = ["Activity", "Profile", "Feature Flags"];
@@ -181,6 +182,10 @@ const Person: React.FC<{ person: PersonData }> = ({ person }) => {
                 {recordings.length ? (
                   <List>
                     {recordings.map((recording) => {
+                      const formattedDuration = colonDelimitedDuration(
+                        recording.recording_duration
+                      );
+
                       return (
                         <ListItem key={recording.id} recording>
                           <Link
@@ -188,11 +193,19 @@ const Person: React.FC<{ person: PersonData }> = ({ person }) => {
                             recording
                             external
                           >
-                            {humanFriendlyDetailedTime(
-                              recording.start_time,
-                              "MMMM DD, YYYY",
-                              "h:mm A"
-                            )}
+                            <div className="w-full flex items-center justify-between">
+                              <span>
+                                {humanFriendlyDetailedTime(
+                                  recording.start_time,
+                                  "MMMM DD, YYYY",
+                                  "h:mm A"
+                                )}
+                              </span>
+
+                              <span className="block text-gray-800 bg-gray-100 py-0.5 px-1 rounded font-code text-xs">
+                                {formattedDuration}
+                              </span>
+                            </div>
                           </Link>
                         </ListItem>
                       );
@@ -208,7 +221,18 @@ const Person: React.FC<{ person: PersonData }> = ({ person }) => {
                     {events.map((event) => {
                       return (
                         <ListItem key={event.id} event>
-                          <Event>{event.event}</Event>
+                          <Event>
+                            <div className="w-full flex items-center justify-between">
+                              <span>{event.event}</span>
+                              <span>
+                                {humanFriendlyDetailedTime(
+                                  event.timestamp,
+                                  "MMMM DD, YYYY",
+                                  "h:mm A"
+                                )}
+                              </span>
+                            </div>
+                          </Event>
                         </ListItem>
                       );
                     })}

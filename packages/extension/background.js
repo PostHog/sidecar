@@ -11,8 +11,8 @@ const createPanel = (query) => {
   if (!document.getElementById("posthog-panel")) {
     const frame = document.createElement("iframe");
     frame.src = query
-      ? `https://inspector-hoglet.vercel.app/?email=${query}`
-      : `https://inspector-hoglet.vercel.app`;
+      ? `https://sidecar-panel.vercel.app//?email=${query}`
+      : `https://sidecar-panel.vercel.app/`;
     frame.id = "posthog-panel";
     frame.style.width = "425px";
     frame.style.position = "fixed";
@@ -34,8 +34,8 @@ const createPanel = (query) => {
   } else {
     const frame = document.getElementById("posthog-panel");
     frame.src = query
-      ? `https://inspector-hoglet.vercel.app/?email=${query}`
-      : `https://inspector-hoglet.vercel.app`;
+      ? `https://sidecar-panel.vercel.app/?email=${query}`
+      : `https://sidecar-panel.vercel.app/`;
   }
 };
 
