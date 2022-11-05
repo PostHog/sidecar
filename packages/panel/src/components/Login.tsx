@@ -42,10 +42,7 @@ const Login: React.FC<LoginProps> = ({ next }) => {
         <div className="space-y-2">
           <Hoglet className="w-8 h-8" />
 
-          <h1 className="text-2xl font-bold">Meet Inspector Hoglet</h1>
-          <h5>
-            by <a href="https://posthog.com">PostHog</a>
-          </h5>
+          <h1 className="text-2xl font-bold">PostHog Sidecar</h1>
 
           <p>
             He shows important customer info from PostHog on certain websites
