@@ -55,13 +55,7 @@ export type Event = {
   properties: Record<string, any>;
 };
 
-const tabs = [
-  "Properties",
-  "Related Groups",
-  "Feature Flags",
-  "Recordings",
-  "Events",
-];
+const tabs = ["Activity", "Profile", "Feature Flags"];
 
 const Person: React.FC<{ person: PersonData }> = ({ person }) => {
   const { user } = useUser();
@@ -83,7 +77,7 @@ const Person: React.FC<{ person: PersonData }> = ({ person }) => {
     if (expanded && user) {
       if (!recordings.length) {
         fetch(
-          `${user.url}/api/projects/@current/session_recordings?person_uuid=${person.uuid}&limit=5`,
+          `${user.url}/api/projects/@current/session_recordings?person_uuid=${person.uuid}&limit=10`,
           { headers: { Authorization: `Bearer ${user.apiKey}` } }
         )
           .then((res) => res.json())
@@ -181,9 +175,51 @@ const Person: React.FC<{ person: PersonData }> = ({ person }) => {
             ))}
           </Tab.List>
           <Tab.Panels>
+            <Tab.Panel as="div" className="space-y-2">
+              <Section>
+                <Header link="#">Recordings</Header>
+                {recordings.length ? (
+                  <List>
+                    {recordings.map((recording) => {
+                      return (
+                        <ListItem key={recording.id} recording>
+                          <Link
+                            to={`${user.url}/person/${person.distinct_ids[0]}#activeTab=sessionRecordings&sessionRecordingId=${recording.id}`}
+                            recording
+                            external
+                          >
+                            {humanFriendlyDetailedTime(
+                              recording.start_time,
+                              "MMMM DD, YYYY",
+                              "h:mm A"
+                            )}
+                          </Link>
+                        </ListItem>
+                      );
+                    })}
+                  </List>
+                ) : null}
+              </Section>
+
+              <Section>
+                <Header>Events</Header>
+                {events.length ? (
+                  <List>
+                    {events.map((event) => {
+                      return (
+                        <ListItem key={event.id} event>
+                          <Event>{event.event}</Event>
+                        </ListItem>
+                      );
+                    })}
+                  </List>
+                ) : null}
+              </Section>
+            </Tab.Panel>
+
             <Tab.Panel as="div">
               <Section>
-                <Header>Properties</Header>
+                <Header>Person Properties</Header>
                 <List>
                   {Object.entries(person.properties)
                     .filter(([key]) =>
@@ -203,10 +239,8 @@ const Person: React.FC<{ person: PersonData }> = ({ person }) => {
                     })}
                 </List>
               </Section>
-            </Tab.Panel>
 
-            <Tab.Panel>
-              <div className="space-y-2">
+              <div className="py-2 space-y-2">
                 {groups.map((group) => {
                   return (
                     <Section key={group.id}>
@@ -264,50 +298,6 @@ const Person: React.FC<{ person: PersonData }> = ({ person }) => {
 
             <Tab.Panel>
               <FeatureFlags featureFlags={featureFlags} />
-            </Tab.Panel>
-
-            <Tab.Panel>
-              <Section>
-                <Header link="#">Recordings</Header>
-                {recordings.length ? (
-                  <List>
-                    {recordings.map((recording) => {
-                      return (
-                        <ListItem key={recording.id} recording>
-                          <Link
-                            to={`${user.url}/person/${person.distinct_ids[0]}#activeTab=sessionRecordings&sessionRecordingId=${recording.id}`}
-                            recording
-                            external
-                          >
-                            {humanFriendlyDetailedTime(
-                              recording.start_time,
-                              "MMMM DD, YYYY",
-                              "h:mm A"
-                            )}
-                          </Link>
-                        </ListItem>
-                      );
-                    })}
-                  </List>
-                ) : null}
-              </Section>
-            </Tab.Panel>
-
-            <Tab.Panel>
-              <Section>
-                <Header>Events</Header>
-                {events.length ? (
-                  <List>
-                    {events.map((event) => {
-                      return (
-                        <ListItem key={event.id} event>
-                          <Event>{event.event}</Event>
-                        </ListItem>
-                      );
-                    })}
-                  </List>
-                ) : null}
-              </Section>
             </Tab.Panel>
           </Tab.Panels>
         </Tab.Group>

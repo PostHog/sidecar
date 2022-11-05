@@ -30,7 +30,7 @@ const FeatureFlags: React.FC<{
       {featureFlags ? (
         <List>
           {Object.entries(featureFlags)
-            .slice(0, 10)
+            .slice(0, 20)
             .map(([key, value]) => {
               return (
                 <ListItem key={key} flag>
