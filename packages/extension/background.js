@@ -27,6 +27,7 @@ const createPanel = (query) => {
     const removeFrame = () => {
       document.body.removeChild(frame);
       document.body.removeEventListener("click", removeFrame);
+      document.body.style = "margin-right: unset";
     };
 
     document.body.addEventListener("click", removeFrame);
