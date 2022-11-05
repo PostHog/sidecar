@@ -1,0 +1,10 @@
+{
+  "name": "@posthog/inspector-hoglet",
+  "workspaces": [
+    "./packages/*"
+  ],
+  "packageManager": "yarn@3.2.4",
+  "devDependencies": {
+    "@types/chrome": "^0.0.200"
+  }
+}
