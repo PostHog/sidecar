@@ -169,16 +169,16 @@ const Person: React.FC<{ person: PersonData }> = ({ person }) => {
 
       {expanded && (
         <Tab.Group>
-          <Tab.List className="flex items-center justify-around border-b mb-2">
+          <Tab.List className="grid grid-cols-3 items-center border-b mb-2 space-x-[2px]">
             {tabs.map((tab) => (
               <Tab key={tab} as={React.Fragment}>
                 {({ selected }) => (
                   <button
                     className={`${
                       selected
-                        ? "text-primary border-b border-primary py-1"
+                        ? "text-primary border-b-2 font-semibold !border-primary py-3"
                         : ""
-                    } text-sm`}
+                    } text-sm h-full hover:scale-[1.02] relative active:top-[0.25px] active:scale-[1.01] border-b-2 border-transparent hover:border-accent border-solid`}
                   >
                     {tab}
                   </button>
