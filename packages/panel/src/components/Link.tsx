@@ -7,9 +7,12 @@ const baseLinkStyles = cntl`
 const rowLinkStyles = cntl`
   flex
   w-full
-  p-1
+  px-1
+  py-2
+  group
   rounded-sm
   hover:bg-light-gray
+  relative hover:scale-[1.005] active:top-[0.25px] active:scale-[1] transition-all
 `;
 
 type Props = {
