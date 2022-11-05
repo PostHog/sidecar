@@ -264,7 +264,7 @@ const Person: React.FC<{ person: PersonData }> = ({ person }) => {
                     .map(([key, value]) => {
                       if (typeof value !== "object") {
                         return (
-                          <ListItem key={key} property classes="space-x-2">
+                          <ListItem key={key} property classes="space-x-2 py-1">
                             <p className="text-xs font-code opacity-70">
                               {key}
                             </p>
@@ -297,7 +297,7 @@ const Person: React.FC<{ person: PersonData }> = ({ person }) => {
                             </div>
 
                             {user.groupProps?.[group.group_type_index] ? (
-                              <ul className="w-full pb-2">
+                              <ul className="w-full pb-1">
                                 {Object.entries(group.properties)
                                   .filter(
                                     ([key]) =>
@@ -310,7 +310,7 @@ const Person: React.FC<{ person: PersonData }> = ({ person }) => {
                                       <ListItem
                                         key={key}
                                         property
-                                        classes="space-x-2"
+                                        classes="space-x-2 py-1"
                                       >
                                         <p className="text-xs font-code opacity-70">
                                           {key}
