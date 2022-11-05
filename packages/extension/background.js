@@ -5,6 +5,10 @@ chrome.runtime.onInstalled.addListener(() => {
     title: "Look this up in PostHog",
     type: "normal",
   });
+
+  chrome.tabs.create({
+    url: "https://posthog.com/roadmap/sidecar",
+  });
 });
 
 const createPanel = (query) => {
