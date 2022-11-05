@@ -14,7 +14,7 @@ import Event from "./Event";
 import { Tab } from "@headlessui/react";
 
 import { useUser } from "./UserProvider";
-import { humanFriendlyDetailedTime } from "../utils";
+import { colonDelimitedDuration, humanFriendlyDetailedTime } from "../utils";
 import React from "react";
 
 export type PersonData = {
@@ -53,6 +53,7 @@ export type Event = {
   event: string;
   id: string;
   properties: Record<string, any>;
+  timestamp: string;
 };
 
 const tabs = ["Activity", "Profile", "Feature Flags"];
@@ -140,33 +141,44 @@ const Person: React.FC<{ person: PersonData }> = ({ person }) => {
         </button>
         <div
           onClick={() => setExpanded((expanded) => !expanded)}
-          className="cursor-pointer"
+          className="cursor-pointer space-y-0.5"
         >
           <span className="text-[15px]">{person.name}</span>
+
           <a
             href={`${user.url}/person/${person.distinct_ids[0]}`}
             className="font-semibold text-sm ml-0.5 mt-1 text-black/30 hover:text-black/60 p-0.5 hover:bg-accent/20 rounded-sm"
           >
             <span className="inline-block -rotate-45">→</span>
           </a>
+
           <p className="text-xs font-code opacity-60">
             {person.distinct_ids[0]}
           </p>
+
+          <div className="text-xs opacity-40 text-black">
+            First seen:{" "}
+            <time className="text-gray-800" dateTime={person.created_at}>{humanFriendlyDetailedTime(
+              person.created_at,
+              "MMMM DD, YYYY",
+              "h:mm A"
+            )}</time>
+          </div>
         </div>
       </div>
 
       {expanded && (
         <Tab.Group>
-          <Tab.List className="flex items-center justify-around border-b mb-2">
+          <Tab.List className="grid grid-cols-3 items-center border-b mb-2 space-x-[2px]">
             {tabs.map((tab) => (
               <Tab key={tab} as={React.Fragment}>
                 {({ selected }) => (
                   <button
                     className={`${
                       selected
-                        ? "text-primary border-b border-primary py-1"
+                        ? "text-primary border-b-2 font-semibold !border-primary py-3"
                         : ""
-                    } text-sm`}
+                    } text-sm h-full hover:scale-[1.02] relative active:top-[0.25px] active:scale-[1.01] border-b-2 border-transparent hover:border-accent border-solid`}
                   >
                     {tab}
                   </button>
@@ -181,6 +193,10 @@ const Person: React.FC<{ person: PersonData }> = ({ person }) => {
                 {recordings.length ? (
                   <List>
                     {recordings.map((recording) => {
+                      const formattedDuration = colonDelimitedDuration(
+                        recording.recording_duration
+                      );
+
                       return (
                         <ListItem key={recording.id} recording>
                           <Link
@@ -188,11 +204,19 @@ const Person: React.FC<{ person: PersonData }> = ({ person }) => {
                             recording
                             external
                           >
-                            {humanFriendlyDetailedTime(
-                              recording.start_time,
-                              "MMMM DD, YYYY",
-                              "h:mm A"
-                            )}
+                            <div className="w-full flex items-center justify-between">
+                              <span>
+                                {humanFriendlyDetailedTime(
+                                  recording.start_time,
+                                  "MMMM DD, YYYY",
+                                  "h:mm A"
+                                )}
+                              </span>
+
+                              <span className="block text-gray-800 bg-gray-100 py-0.5 px-1 rounded font-code text-xs">
+                                {formattedDuration}
+                              </span>
+                            </div>
                           </Link>
                         </ListItem>
                       );
@@ -208,7 +232,18 @@ const Person: React.FC<{ person: PersonData }> = ({ person }) => {
                     {events.map((event) => {
                       return (
                         <ListItem key={event.id} event>
-                          <Event>{event.event}</Event>
+                          <Event>
+                            <div className="w-full flex items-center justify-between">
+                              <span>{event.event}</span>
+                              <span>
+                                {humanFriendlyDetailedTime(
+                                  event.timestamp,
+                                  "MMMM DD, YYYY",
+                                  "h:mm A"
+                                )}
+                              </span>
+                            </div>
+                          </Event>
                         </ListItem>
                       );
                     })}
