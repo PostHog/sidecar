@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { useUser } from "./UserProvider";
-import { Hoglet } from "./Icons";
+import { SidecarLogo } from "./Icons";
 import Link from "./Link";
 
 type LoginProps = {
@@ -40,18 +40,18 @@ const Login: React.FC<LoginProps> = ({ next }) => {
     <div className="h-full px-6 flex flex-col justify-center bg-light-gray">
       <form onSubmit={handleSubmit} className="space-y-8">
         <div className="space-y-2">
-          <Hoglet className="w-8 h-8" />
+          
+          <SidecarLogo className="h-20 mb-4" />
 
-          <h1 className="text-2xl font-bold">PostHog Sidecar</h1>
+          <h1 className="text-2xl font-bold hidden">PostHog Sidecar</h1>
 
-          <p>
-            He shows important customer info from PostHog on certain websites
-            where you interact with them.
+          <p className="text-[15px]">
+            Customer data from PostHog that shows in any SaaS tool
           </p>
         </div>
 
-        <div className="space-y-6">
-          <h3 className="text-lg font-bold">Get started</h3>
+        <div className="space-y-4">
+          <h3 className="text-2xl font-bold mb-0">Get started</h3>
 
           <div>
             <label
@@ -130,15 +130,20 @@ const Login: React.FC<LoginProps> = ({ next }) => {
               )}
             </p>
           </div>
+          
         </div>
 
         {/* TODO: Hit the API to make sure everything is valid before coninuing */}
         <button
           disabled={!(location && host && apiKey)}
-          className="bg-primary rounded w-full py-2 text-white disabled:bg-blue-200"
+          className="bg-primary rounded w-full py-2 text-white disabled:bg-blue-200 relative hover:scale-[1.005] active:top-[0.25px] active:scale-[1] transition-all font-bold text-[15px]"
         >
           Next
         </button>
+
+        <p className="text-sm font-semibold text-center">
+          <Link to="https://posthog.com?utm_source=sidecar-extension" external>New to PostHog?</Link>
+        </p>
       </form>
     </div>
   );
