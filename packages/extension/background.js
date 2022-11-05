@@ -50,10 +50,14 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
 });
 
 chrome.action.onClicked.addListener((tab) => {
-  chrome.scripting.executeScript({
-    target: { tabId: tab.id, allFrames: false },
-    func: createPanel,
-  });
+  getEmailCheck(tab)
+  .then((email) => {
+    chrome.scripting.executeScript({
+      target: { tabId: tab.id, allFrames: false },
+      args: [email],
+      func: createPanel,
+    });
+  })
 });
 
 chrome.runtime.onMessage.addListener((message) => {
@@ -61,3 +65,35 @@ chrome.runtime.onMessage.addListener((message) => {
   } else if (message.type === "get-defs") {
   }
 });
+
+
+const getEmailCheck = (tab) => {
+  return new Promise((resolve, reject) => {
+    // Get email if we know where to look
+    if (tab.url.includes("zendesk")) {
+      chrome.scripting.executeScript({
+        target: { tabId: tab.id, allFrames: false },
+        func: () => {
+          let email = "";
+          const userEmailElement = document.getElementsByClassName("email-text")
+          if (userEmailElement.length > 0) {
+            email = userEmailElement[0].innerText
+          }
+
+          if (!email) {
+            const ticketEmail = document.getElementsByClassName("sc-7acs88-3 hljQCC")
+            if (ticketEmail.length > 0) {
+              email = ticketEmail[0].innerText
+            }
+          }
+          return email
+        },
+      }).then((result) => {
+        let email = result[0].result || "";
+        return resolve(email);
+      });
+    } else {
+      return resolve("");
+    }
+  });
+}
