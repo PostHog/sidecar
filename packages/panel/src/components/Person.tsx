@@ -141,18 +141,29 @@ const Person: React.FC<{ person: PersonData }> = ({ person }) => {
         </button>
         <div
           onClick={() => setExpanded((expanded) => !expanded)}
-          className="cursor-pointer"
+          className="cursor-pointer space-y-0.5"
         >
           <span className="text-[15px]">{person.name}</span>
+
           <a
             href={`${user.url}/person/${person.distinct_ids[0]}`}
             className="font-semibold text-sm ml-0.5 mt-1 text-black/30 hover:text-black/60 p-0.5 hover:bg-accent/20 rounded-sm"
           >
             <span className="inline-block -rotate-45">→</span>
           </a>
+
           <p className="text-xs font-code opacity-60">
             {person.distinct_ids[0]}
           </p>
+
+          <div className="text-xs opacity-40 text-black">
+            First seen:{" "}
+            <time className="text-gray-800" dateTime={person.created_at}>{humanFriendlyDetailedTime(
+              person.created_at,
+              "MMMM DD, YYYY",
+              "h:mm A"
+            )}</time>
+          </div>
         </div>
       </div>
 

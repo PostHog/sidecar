@@ -75,14 +75,16 @@ const Persons: React.FC<PersonsProps> = (props) => {
             </span>
           </div>
           <div className="flex items-center space-x-2">
-            <Link
-              to="https://app.posthog.com"
-              external
-              classes="text-xs text-black bg-accent/5 hover:bg-accent/10 active:bg-accent/20 p-1.5 rounded-full leading-none group"
-            >
-              Open in PostHog{" "}
-              <span className="opacity-50 group-hover:opacity-75">→</span>
-            </Link>
+            {user && (
+              <Link
+                to={`${user.url}/persons?search=${query}`}
+                external
+                classes="text-xs text-black bg-accent/5 hover:bg-accent/10 active:bg-accent/20 p-1.5 rounded-full leading-none group"
+              >
+                Open in PostHog
+                <span className="opacity-50 group-hover:opacity-75">→</span>
+              </Link>
+            )}
             <button onClick={() => props.setScreen("configure")}>
               <Cog6ToothIcon className="w-5 h-5 text-gray-600" />
             </button>
