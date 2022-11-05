@@ -5,7 +5,7 @@ import { useUser } from "./UserProvider";
 import Person, { PersonData } from "./Person";
 import Link from "./Link";
 import CurrentProject from "./CurrentProject";
-import { Logomark } from "./Icons";
+import { PostHogLogomark } from "./Icons";
 
 import { Cog6ToothIcon } from "@heroicons/react/24/outline";
 
