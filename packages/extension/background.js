@@ -22,6 +22,7 @@ const createPanel = (query) => {
     frame.style.height = "100%";
     frame.style.border = "";
     frame.style.zIndex = 99999;
+    document.body.style = "margin-right: 425px";
 
     const removeFrame = () => {
       document.body.removeChild(frame);
