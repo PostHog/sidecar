@@ -12,7 +12,7 @@
 - Join the PostHog Slack group [to download the zip](https://posthogusers.slack.com/archives/C049QQ1BN04/p1667674709511729) and unzip it
 - Open [the Extensions menu in Chrome](chrome://extensions/), enable Developer Mode 
 - Choose 'Load unpacked extension' and point to the unzipped files
-- Close Chrome and restart your machine
+- Configure the extension and you're ready to ride!
 
 ## Feedback? Yes, please. 
 Sidecar is a PostHog hackathon project under active, rapid development. Expect rough edges and please share feedback generously via [the PostHog Slack group](posthog.com/slack). 
