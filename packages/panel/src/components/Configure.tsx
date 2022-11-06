@@ -110,6 +110,7 @@ const Configure: React.FC<ConfigureProps> = ({ next }) => {
         {groups.map((group) => {
           return (
             <TaxonomicFilter
+              key={group.group_type_index}
               label={`Key ${group.group_type} properties`}
               placeholder={`Search ${group.group_type} properties...`}
               values={group.properties.map(({ name }) => name)}

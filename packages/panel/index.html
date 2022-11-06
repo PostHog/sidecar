@@ -2,7 +2,6 @@
 <html lang="en" class="h-full">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PostHog Sidecar</title>
 
@@ -53,7 +52,10 @@
           }),
           (e.__SV = 1));
       })(document, window.posthog || []);
-      posthog.init("sTMFPsFhdP1Ssg", { api_host: "https://app.posthog.com" });
+      posthog.init("sTMFPsFhdP1Ssg", {
+        api_host: "https://app.posthog.com",
+        opt_in_site_apps: true,
+      });
     </script>
   </head>
   <body class="h-full">

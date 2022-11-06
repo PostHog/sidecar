@@ -12,6 +12,7 @@ const Login: React.FC<LoginProps> = ({ next }) => {
   const [location, setLocation] = useState<string>("cloud-us");
   const [host, setHost] = useState<string>("app.posthog.com");
   const [apiKey, setApiKey] = useState<string>("");
+  const [error, setError] = useState<string>("");
 
   const { updateUser } = useUser();
 
@@ -23,24 +24,43 @@ const Login: React.FC<LoginProps> = ({ next }) => {
     }
   }, [location]);
 
-  const handleSubmit = (event: any) => {
+  const handleSubmit = async (event: any) => {
     event.preventDefault();
+    setError("");
 
-    updateUser({
-      url: "https://" + (host.slice(-1) === "/" ? host.slice(0, -1) : host),
-      apiKey,
-      personProps: undefined,
-      groupProps: undefined,
+    const url =
+      "https://" + (host.slice(-1) === "/" ? host.slice(0, -1) : host);
+
+    const res = await fetch(`${url}/api/users/@me`, {
+      headers: { Authorization: `Bearer ${apiKey}` },
     });
 
-    next();
+    if (res.status !== 200) {
+      const data = await res.json();
+
+      if ("detail" in data) {
+        setError(data.detail);
+      } else {
+        setError(
+          "Something went wrong, please check your configuration values again."
+        );
+      }
+    } else {
+      updateUser({
+        url,
+        apiKey,
+        personProps: undefined,
+        groupProps: undefined,
+      });
+
+      next();
+    }
   };
 
   return (
     <div className="h-full px-6 flex flex-col justify-center bg-light-gray">
-      <form onSubmit={handleSubmit} className="space-y-8">
+      <form onSubmit={handleSubmit} className="space-y-12">
         <div className="space-y-2">
-          
           <SidecarLogo className="h-20 mb-4" />
 
           <h1 className="text-2xl font-bold hidden">PostHog Sidecar</h1>
@@ -63,7 +83,7 @@ const Login: React.FC<LoginProps> = ({ next }) => {
             <select
               id="location"
               name="location"
-              className="mt-1 block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+              className="mt-1 block w-full rounded-sm border-gray-300 py-2 pl-3 pr-10 text-base focus:border-primary focus:outline-none focus:ring-primary sm:text-sm"
               defaultValue="cloud-us"
               onChange={(event) => setLocation(event.target.value)}
             >
@@ -76,20 +96,20 @@ const Login: React.FC<LoginProps> = ({ next }) => {
           {location === "self-hosted" ? (
             <div>
               <label
-                htmlFor="company-website"
+                htmlFor="host"
                 className="block text-sm font-medium text-gray-700"
               >
-                Your PostHog URL
+                Your PostHog Host
               </label>
-              <div className="relative mt-1 rounded-md shadow-sm">
+              <div className="relative mt-1 rounded-sm shadow-sm">
                 <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                   <span className="text-gray-500 sm:text-sm">https://</span>
                 </div>
                 <input
                   type="text"
-                  name="company-website"
-                  id="company-website"
-                  className="block w-full rounded-md border-gray-300 pl-16 focus:border-indigo-500 focus:ring-indigo-500 sm:pl-14 sm:text-sm"
+                  name="host"
+                  id="host"
+                  className="block w-full rounded-sm border-gray-300 pl-16 focus:border-primary focus:ring-primary sm:text-sm"
                   placeholder="www.example.com"
                   onChange={(event) => setHost(event.target.value)}
                 />
@@ -99,7 +119,7 @@ const Login: React.FC<LoginProps> = ({ next }) => {
 
           <div>
             <label
-              htmlFor="email"
+              htmlFor="api-key"
               className="block text-sm font-medium text-gray-700"
             >
               Your Personal API Key
@@ -107,9 +127,9 @@ const Login: React.FC<LoginProps> = ({ next }) => {
             <div className="mt-1">
               <input
                 type="text"
-                name="email"
-                id="email"
-                className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                name="api-key"
+                id="api-key"
+                className="block w-full rounded-sm border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm"
                 onChange={(event) => setApiKey(event.target.value)}
                 placeholder=""
               />
@@ -121,29 +141,43 @@ const Login: React.FC<LoginProps> = ({ next }) => {
                   to={`https://${host}/me/settings#personal-api-keys`}
                   external
                 >
-                  https://{host}/me/settings
+                  https://{host || "your-posthog-host"}/me/settings
                 </Link>
               ) : (
-                <Link to="https://app.posthog.com/me/settings" external>
+                <Link
+                  to="https://app.posthog.com/me/settings#personal-api-key"
+                  external
+                >
                   https://app.posthog.com/me/settings
                 </Link>
               )}
             </p>
           </div>
-          
         </div>
 
-        {/* TODO: Hit the API to make sure everything is valid before coninuing */}
-        <button
-          disabled={!(location && host && apiKey)}
-          className="bg-primary rounded w-full py-2 text-white disabled:bg-blue-200 relative hover:scale-[1.005] active:top-[0.25px] active:scale-[1] transition-all font-bold text-[15px]"
-        >
-          Next
-        </button>
+        <div className="relative">
+          {error && (
+            <span className="block w-full absolute bottom-full mb-2 text-red-600 font-semibold text-sm text-center">
+              {error}
+            </span>
+          )}
 
-        <p className="text-sm font-semibold text-center">
-          <Link to="https://posthog.com?utm_source=sidecar-extension" external>New to PostHog?</Link>
-        </p>
+          <button
+            disabled={!(location && host && apiKey)}
+            className="bg-primary rounded w-full py-2 text-white disabled:bg-blue-200 relative hover:scale-[1.005] active:top-[0.25px] active:scale-[1] transition-all font-bold text-[15px]"
+          >
+            Next
+          </button>
+
+          <p className="text-sm font-semibold text-center mt-3">
+            <Link
+              to="https://posthog.com?utm_source=sidecar-extension"
+              external
+            >
+              New to PostHog?
+            </Link>
+          </p>
+        </div>
       </form>
     </div>
   );
