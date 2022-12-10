@@ -135,7 +135,7 @@ const Login: React.FC<LoginProps> = ({ next }) => {
               />
             </div>
             <p className="mt-2 text-sm text-gray-500" id="email-description">
-              Get one at{" "}
+              Get one at{" "}. You may need to disable adblockers for validation to work. 
               {location === "self-hosted" ? (
                 <Link
                   to={`https://${host}/me/settings#personal-api-keys`}
