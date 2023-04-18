@@ -49,7 +49,7 @@ const Configure: React.FC<ConfigureProps> = ({ next }) => {
       }).then((res) => res.json())
 
       for await (let groupType of groupTypes) {
-        const groupProperties = await fetch(`${user.url}/api/projects/@current/property_definitions?limit=50&group_type_index=0&offset=50&type=group`, {
+        const groupProperties = await fetch(`${user.url}/api/projects/@current/property_definitions?limit=500&group_type_index=0&offset=50&type=group`, {
           headers: { Authorization: `Bearer ${user.apiKey}` },
         }).then((res) => res.json())
 
