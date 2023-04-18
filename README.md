@@ -25,3 +25,11 @@
 Sidecar is a PostHog hackathon project under active, rapid development. Expect rough edges and please share feedback generously via the #website-and-docs channel in [the PostHog Slack group](posthog.com/slack). 
 
 If you find bugs, [please create an issue](https://github.com/PostHog/sidecar/issues). **We give merch and other rewards for good feedback and contributed PRs.**
+
+-- 
+
+## Developing
+
+1. `yarn`
+1. cd `packages/panel`
+1. `yarn dev`
