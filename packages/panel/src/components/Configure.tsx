@@ -30,45 +30,40 @@ const Configure: React.FC<ConfigureProps> = ({ next }) => {
     user?.personProps || []
   );
   const [definitions, setDefinitions] = useState<PersonProperty[]>([]);
-  const [groups, setGroups] = useState<Group[]>([]);
+  const [groupTypes, setGroupTypes] = useState<Group[]>([]);
 
   const [groupProperties, setGroupProperties] = useState<
     Record<string, string[]>
   >(user?.groupProps || {});
 
-  useEffect(() => {
+  const fetchProperties = async () => {
     if (user) {
-      fetch(`${user.url}/api/projects/@current/persons/properties`, {
-        headers: { Authorization: `Bearer ${user.apiKey}` },
-      })
-        .then((res) => res.json())
-        .then((data) => setDefinitions(data));
+      const personProperties = await fetch(`${user.url}/api/projects/@current/property_definitions?type=person`, {
+          headers: { Authorization: `Bearer ${user.apiKey}` },
+      }).then(res => res.json());
 
-      fetch(`${user.url}/api/projects/@current/groups_types`, {
+      setDefinitions(personProperties.results);
+
+      const groupTypes = await fetch(`${user.url}/api/projects/@current/groups_types`, {
         headers: { Authorization: `Bearer ${user.apiKey}` },
-      })
-        .then((res) => res.json())
-        .then((groupTypes) => {
-          fetch(
-            `${user.url}/api/projects/@current/groups/property_definitions`,
-            {
-              headers: { Authorization: `Bearer ${user.apiKey}` },
-            }
-          )
-            .then((res) => res.json())
-            .then((groupProps) => {
-              setGroups(
-                groupTypes.map((group: any) => {
-                  return {
-                    ...group,
-                    properties: groupProps[group.group_type_index.toString()],
-                  };
-                })
-              );
-            });
-        })
-        .catch((err) => console.error(err));
+      }).then((res) => res.json())
+
+      for await (let groupType of groupTypes) {
+        const groupProperties = await fetch(`${user.url}/api/projects/@current/property_definitions?limit=50&group_type_index=0&offset=50&type=group`, {
+          headers: { Authorization: `Bearer ${user.apiKey}` },
+        }).then((res) => res.json())
+
+        console.log(groupProperties)
+        setGroupTypes(groups => [...groups, {
+              ...groupType,
+              properties: groupProperties.results
+          }])
+      }
     }
+  }
+
+  useEffect(() => {
+      fetchProperties()
   }, [user]);
 
   const handleSubmit = (event: React.FormEvent) => {
@@ -107,7 +102,7 @@ const Configure: React.FC<ConfigureProps> = ({ next }) => {
           }
         />
 
-        {groups.map((group) => {
+        {groupTypes.map((group) => {
           return (
             <TaxonomicFilter
               key={group.group_type_index}

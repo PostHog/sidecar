@@ -123,8 +123,6 @@ const Persons: React.FC<PersonsProps> = (props) => {
         <div className="w-full h-full flex items-center justify-center">
           No results
         </div>
-      ) : persons.length === 1 ? (
-        <Person person={persons[0]} />
       ) : (
         <ul className="divide-y overflow-y-scroll flex-grow overscroll-y-contain pb-2">
           {persons.map((person) => {
