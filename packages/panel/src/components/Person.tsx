@@ -3,6 +3,9 @@ import { useState, useEffect } from "react";
 import expand from "../assets/expand.svg";
 import collapse from "../assets/collapse.svg";
 
+
+import { Collapse, Expand } from "./Icons";
+
 import FeatureFlags, { FeatureFlagsData } from "./FeatureFlags";
 import Section from "./Section";
 import Header from "./Header";
@@ -141,12 +144,14 @@ const Person: React.FC<{ person: PersonData }> = ({ person }) => {
 
   return user ? (
     <div key={person.id} className="pb-2">
-      <div className="flex items-center space-x-2 py-2 px-3 cursor-pointer bg-accent dark:bg-accent-dark relative transition-all hover:scale-[1.01] active:top-[0.5px] active:scale-[1]">
+      <div className="flex items-center space-x-2 py-2 px-3 cursor-pointer bg-accent dark:bg-background-dark relative transition-all hover:scale-[1.01] active:top-[0.5px] active:scale-[1]">
         <button
-          className="shrink-0 hover:bg-accent/5 active:bg-accent/10 rounded p-1"
+          className="shrink-0 leading-none hover:bg-accent/25 active:bg-primary-dark/25 rounded p-1 text-primary dark:text-primary-dark"
           onClick={() => setExpanded((expanded) => !expanded)}
         >
-          <img src={expanded ? collapse : expand} className="w-6 h-6" />
+          <span className="inline-block w-6 h-6 text-primary dark:text-primary-dark">
+            {expanded ? <Collapse /> : <Expand />}
+          </span>
           <span className="sr-only">Expand person</span>
         </button>
         <div
@@ -166,9 +171,9 @@ const Person: React.FC<{ person: PersonData }> = ({ person }) => {
             {person.distinct_ids[0]}
           </p>
 
-          <div className="text-xs opacity-40 text-black">
+          <div className="text-xs text-primary/40 dark:text-primary-dark/40">
             First seen:{" "}
-            <time className="text-gray-800" dateTime={person.created_at}>
+            <time className="" dateTime={person.created_at}>
               {humanFriendlyDetailedTime(
                 person.created_at,
                 "MMMM DD, YYYY",
