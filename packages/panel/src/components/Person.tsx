@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import { Collapse, Expand, Activity, Profile, Toggle } from "./Icons";
+import { Collapse, Expand, Activity, Profile, Toggle, Play } from "./Icons";
 
 import FeatureFlags, { FeatureFlagsData } from "./FeatureFlags";
 import Section from "./Section";
@@ -233,16 +233,19 @@ const Person: React.FC<{ person: PersonData }> = ({ person }) => {
                           external
                         >
                           <div className="w-full flex items-center justify-between">
-                            <span>
-                              {humanFriendlyDetailedTime(
-                                recording.start_time,
-                                "MMMM DD, YYYY",
-                                "h:mm A"
-                              )}
-                              <span className="hidden leading-none group-hover:inline-block -rotate-45 opacity-50 px-1 py-0.5">
-                                →
+                            <div className="flex items-center gap-2 group">
+                              <span className="inline-block w-4 h-4 text-primary dark:text-primary-dark opacity-30 group-hover:opacity-75"><Play /></span>
+                              <span className="text-xs">
+                                {humanFriendlyDetailedTime(
+                                  recording.start_time,
+                                  "MMMM DD, YYYY",
+                                  "h:mm A"
+                                )}
+                                <span className="hidden leading-none group-hover:inline-block -rotate-45 opacity-50 px-1 py-0.5">
+                                  →
+                                </span>
                               </span>
-                            </span>
+                            </div>
 
                             <span className="block text-primary/40 dark:text-primary-dark/40 text-xs">
                               {formattedDuration}

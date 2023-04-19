@@ -5,9 +5,8 @@ import { useUser } from "./UserProvider";
 import Person, { PersonData } from "./Person";
 import Link from "./Link";
 import CurrentProject from "./CurrentProject";
-import { PostHogLogomark } from "./Icons";
+import { PostHogLogomark, Settings } from "./Icons";
 
-import { Cog6ToothIcon } from "@heroicons/react/24/outline";
 
 type PersonsProps = {
   setScreen: (screen: string) => void;
@@ -74,19 +73,19 @@ const Persons: React.FC<PersonsProps> = (props) => {
               <CurrentProject />
             </span>
           </div>
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-1">
             {user && (
               <Link
                 to={`${user.url}/persons?search=${query}`}
                 external
-                classes="text-xs text-black bg-accent/5 hover:bg-accent/10 active:bg-accent/20 p-1.5 rounded-full leading-none group"
+                classes="text-xs text-black bg-accent/5 hover:bg-accent/10 active:bg-accent/20 py-1.5 px-3 rounded-full leading-none group"
               >
                 Open in PostHog
-                <span className="opacity-50 group-hover:opacity-75">→</span>
+                <span className="ml-1 opacity-50 group-hover:opacity-75">→</span>
               </Link>
             )}
-            <button onClick={() => props.setScreen("configure")}>
-              <Cog6ToothIcon className="w-5 h-5 text-gray-600" />
+            <button onClick={() => props.setScreen("configure")} className="group flex items-center justify-center leading-none p-1.5 rounded-sm hover:bg-primary/20 dark:hover:bg-primary-dark/20">
+              <span className="inline-block w-4 h-4 text-primary/30 dark:text-primary-dark/30 group-hover:text-primary/60 group-hover:dark:text-primary-dark/60"><Settings /></span>
             </button>
           </div>
         </div>

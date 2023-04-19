@@ -7,12 +7,12 @@ const baseLinkStyles = cntl`
 const rowLinkStyles = cntl`
   flex
   w-full
-  px-1
+  px-2
   py-2
   group
   rounded-sm
-  bg-accent dark:bg-accent-dark
-  relative hover:scale-[1.005] active:top-[0.25px] active:scale-[1] transition-all
+  bg-accent dark:bg-accent-dark dark:hover:bg-[rgba(255,255,255,.1)]
+  relative hover:scale-[1.005] active:top-[0.25px] active:scale-[1] 
 `;
 
 type Props = {

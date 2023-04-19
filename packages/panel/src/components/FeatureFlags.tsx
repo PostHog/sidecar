@@ -3,8 +3,19 @@ import Section from "./Section";
 import List from "./List";
 import ListItem from "./ListItem";
 import Link from "./Link";
+import cntl from "cntl";
 
 import { useUser } from "./UserProvider";
+
+const baseChipStyles = cntl`
+  block
+  py-0.5
+  px-1
+  rounded-sm
+  font-code
+  text-xs
+`;
+
 
 export type FeatureFlagsData = Record<
   string,
@@ -48,8 +59,10 @@ const FeatureFlags: React.FC<{
                   >
                     <div className="w-full flex items-center justify-between">
                       <span className="block">{key}</span>
-                      <span className="block text-gray-800 bg-gray-100 py-0.5 px-1 rounded font-code text-xs">
-                        {displayFeatureFlagValue(value)}
+                      <span className={`${baseChipStyles} `}>
+
+
+                        {displayFeatureFlagValue(value) == "true" ? (<span className={`${baseChipStyles} bg-green text-white`}>true</span>) : displayFeatureFlagValue(value) == "false" ? (<span className={`${baseChipStyles} bg-red text-white`}>false</span>) : (<span className={baseChipStyles}>${displayFeatureFlagValue(value)}</span>)}
                       </span>
                     </div>
                   </Link>
