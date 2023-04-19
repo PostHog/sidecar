@@ -144,7 +144,7 @@ const Person: React.FC<{ person: PersonData }> = ({ person }) => {
 
   return user ? (
     <div key={person.id} className="pb-2">
-      <div className="flex items-center space-x-2 py-2 px-3 cursor-pointer bg-accent dark:bg-background-dark relative transition-all hover:scale-[1.01] active:top-[0.5px] active:scale-[1]">
+      <div className="flex items-center space-x-2 py-2 px-3 cursor-pointer bg-accent dark:bg-background-dark relative transition-all hover:scale-[1.005] active:top-[0.5px] active:scale-[1]">
         <button
           className="shrink-0 leading-none hover:bg-accent/25 active:bg-primary-dark/25 rounded p-1 text-primary dark:text-primary-dark"
           onClick={() => setExpanded((expanded) => !expanded)}
@@ -305,7 +305,7 @@ const Person: React.FC<{ person: PersonData }> = ({ person }) => {
                       <List>
                         <ListItem>
                           <div className="w-full flex flex-col items-stretch">
-                            <div className="w-full flex items-center justify-between border-b py-1 text-sm">
+                            <div className="w-full flex items-center justify-between border-b border-border dark:border-border-dark py-1 text-sm">
                               <Link
                                 external
                                 to={`${user.url}/groups/${group.group_type_index}/${group.id}`}
