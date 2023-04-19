@@ -5,7 +5,7 @@ const baseStyles = cntl`
   border-t 
   border-solid 
   border-border
-  border-border-dark
+  dark:border-border-dark
   first:border-t-0
   mt-[1px]
   first:mt-0
@@ -31,7 +31,7 @@ const ListItem: React.FC<any> = ({
   ) : recording ? (
     <li className={`${baseStyles} ${classes}`}>{children}</li>
   ) : event ? (
-    <li className={`${baseStyles} border-t border-solid border-border dark:border-border-accent-dark py-1 ${classes}`}>
+    <li className={`${baseStyles} py-1 ${classes}`}>
       {children}
     </li>
   ) : (

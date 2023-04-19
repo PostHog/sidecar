@@ -140,7 +140,7 @@ const Person: React.FC<{ person: PersonData }> = ({ person }) => {
 
   return user ? (
     <div key={person.id} className="pb-2">
-      <div className="flex items-center space-x-2 py-2 px-1 cursor-pointer bg-accent dark:bg-background-dark relative transition-all hover:scale-[1.005] active:top-[0.5px] active:scale-[1]">
+      <div className="flex items-center space-x-2 py-2 px-1 cursor-pointer bg-background dark:bg-background-dark relative transition-all hover:scale-[1.005] active:top-[0.5px] active:scale-[1]">
         <button
           className="shrink-0 leading-none hover:bg-accent/25 active:bg-primary-dark/25 rounded p-1 text-primary dark:text-primary-dark"
           onClick={() => setExpanded((expanded) => !expanded)}
@@ -163,7 +163,7 @@ const Person: React.FC<{ person: PersonData }> = ({ person }) => {
             dark:text-primary-dark/30 
             hover:text-primary/60 
             dark:hover:text-white/50 
-            hover:bg-accent/20 
+            hover:bg-primary/5 
             dark:hover:bg-white/20 
             px-1 py-0.5 rounded-sm"
             target="_blank"
@@ -196,9 +196,9 @@ const Person: React.FC<{ person: PersonData }> = ({ person }) => {
                 {({ selected }) => (
                   <button
                     className={`${selected
-                      ? "text-primary font-bold dark:text-primary-dark bg-primary-dark/20 dark:bg-border-dark"
-                      : "text-primary/75 dark:text-primary-dark/75 hover:bg-accent dark:hover:bg-accent-dark"
-                      } inline-flex justify-center gap-1.5 px-2.5 py-2 rounded-sm text-xs h-full relative hover:scale-[1.02] active:top-[0.25px] active:scale-[1.01] hover:border-accent transition-all`}
+                      ? "text-primary font-bold dark:text-primary-dark bg-primary/5 dark:bg-primary-dark/20 dark:bg-border-dark"
+                      : "text-primary/75 dark:text-primary-dark/75 hover:bg-primary/5 dark:hover:bg-accent-dark"
+                      } inline-flex justify-center gap-1.5 px-2.5 py-2 rounded-sm text-xs h-full relative hover:scale-[1.02] active:top-[0px] active:scale-[1.01] hover:border-accent transition-all`}
                   >
                     <span className="inline-block h-4 w-4 text-primary dark:text-primary-dark"><Activity /></span>
                     {/*}
@@ -232,8 +232,8 @@ const Person: React.FC<{ person: PersonData }> = ({ person }) => {
                           recording
                           external
                         >
-                          <div className="w-full flex items-center justify-between">
-                            <div className="flex items-center gap-2 group">
+                          <div className="w-full flex items-center justify-between py-1">
+                            <div className="flex items-center gap-1.5 group">
                               <span className="inline-block w-4 h-4 text-primary dark:text-primary-dark opacity-30 group-hover:opacity-75"><Play /></span>
                               <span className="text-xs">
                                 {humanFriendlyDetailedTime(
@@ -316,18 +316,19 @@ const Person: React.FC<{ person: PersonData }> = ({ person }) => {
                       </Header>
                       <List>
                         <ListItem>
-                          <div className="w-full flex flex-col items-stretch">
-                            <div className="w-full flex items-center justify-between border-b border-border dark:border-border-dark py-1 text-sm">
+                          <div className="w-full flex flex-col items-stretch px-1 divide-y divide-solid divide-border dark:divide-border-dark">
+                            <div className="w-full flex items-center justify-between py-1 text-sm">
                               <Link
                                 external
                                 to={`${user.url}/groups/${group.group_type_index}/${group.id}`}
+
                               >
                                 {group.properties?.name || group.id}
                               </Link>
                             </div>
 
-                            {user.groupProps?.[group.group_type_index] ? (
-                              <ul className="w-full pb-1">
+                            {user.groupProps?.[group.group_type_index] && (
+                              <ul className="w-full p-1 empty:hidden">
                                 {Object.entries(group.properties)
                                   .filter(
                                     ([key]) =>
@@ -352,7 +353,7 @@ const Person: React.FC<{ person: PersonData }> = ({ person }) => {
                                     );
                                   })}
                               </ul>
-                            ) : null}
+                            )}
                           </div>
                         </ListItem>
                       </List>
