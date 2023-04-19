@@ -3,8 +3,8 @@ const Header: React.FC<{ link?: string; children: React.ReactNode }> = ({
   children,
 }) => {
   return (
-    <header className="border-b border-solid border-border dark:border-border-dark bg-background dark:bg-accent-dark flex items-center justify-between px-2">
-      <h3 className="rounded-sm text-sm py-1 font-medium">{children}</h3>
+    <header className="bg-background dark:bg-accent-dark flex items-center justify-between px-2">
+      <h3 className="rounded-sm text-xs py-2 font-medium">{children}</h3>
       {link ? (
         <a
           href={link}

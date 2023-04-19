@@ -12,7 +12,7 @@ const List: React.FC<ListProps> = ({ className = "", children, loading }) => {
       })}
     </ul>
   ) : (
-    <ul className={`mx-1 py-0.5 ${className}`}>{children}</ul>
+    <ul className={`mx-1 py-0.5 border-t border-solid border-border dark:border-border-dark empty:hidden ${className}`}>{children}</ul>
   );
 };
 

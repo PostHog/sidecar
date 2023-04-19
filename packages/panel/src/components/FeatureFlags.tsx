@@ -57,13 +57,10 @@ const FeatureFlags: React.FC<{
                     flag
                     external
                   >
-                    <div className="w-full flex items-center justify-between">
-                      <span className="block">{key}</span>
-                      <span className={`${baseChipStyles} `}>
+                    <div className="w-full flex items-center justify-between py-0.5">
+                      <span className="block text-[13px]">{key}</span>
 
-
-                        {displayFeatureFlagValue(value) == "true" ? (<span className={`${baseChipStyles} bg-green text-white`}>true</span>) : displayFeatureFlagValue(value) == "false" ? (<span className={`${baseChipStyles} bg-red text-white`}>false</span>) : (<span className={baseChipStyles}>${displayFeatureFlagValue(value)}</span>)}
-                      </span>
+                      {displayFeatureFlagValue(value) == "true" ? (<span className={`${baseChipStyles} bg-green text-white`}>true</span>) : displayFeatureFlagValue(value) == "false" ? (<span className={`${baseChipStyles} bg-red text-white`}>false</span>) : (<span className={baseChipStyles}>${displayFeatureFlagValue(value)}</span>)}
                     </div>
                   </Link>
                 </ListItem>
