@@ -162,7 +162,15 @@ const Person: React.FC<{ person: PersonData }> = ({ person }) => {
 
           <a
             href={`${user.url}/person/${person.distinct_ids[0]}`}
-            className="font-semibold text-sm ml-0.5 mt-1 text-black/30 hover:text-black/60 p-0.5 hover:bg-accent/20 rounded-sm"
+            className="font-semibold text-sm ml-0.5 mt-1 
+            text-primary/30 
+            dark:text-primary-dark/30 
+            hover:text-primary/60 
+            dark:hover:text-white/50 
+            hover:bg-accent/20 
+            dark:hover:bg-white/20 
+            px-1 py-0.5 rounded-sm"
+            target="_blank"
           >
             <span className="inline-block -rotate-45">→</span>
           </a>
@@ -192,9 +200,9 @@ const Person: React.FC<{ person: PersonData }> = ({ person }) => {
                 {({ selected }) => (
                   <button
                     className={`${selected
-                      ? "text-primary dark:text-primary-dark bg-primary-dark/20 dark:bg-primary-light/20"
+                      ? "text-primary font-bold dark:text-primary-dark bg-primary-dark/20 dark:bg-border-dark"
                       : "text-primary/75 dark:text-primary-dark/75"
-                      }  px-2 py-1 rounded-sm text-sm h-full relative hover:scale-[1.02] active:top-[0.25px] active:scale-[1.01] hover:border-accent `}
+                      }  px-2 py-1 rounded-sm text-xs h-full relative hover:scale-[1.02] active:top-[0.25px] active:scale-[1.01] hover:border-accent `}
                   >
                     {tab}
                   </button>

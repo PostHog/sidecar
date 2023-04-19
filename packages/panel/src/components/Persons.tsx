@@ -110,11 +110,11 @@ const Persons: React.FC<PersonsProps> = (props) => {
       </div>
 
       {loading ? (
-        <ul className="divide-y">
+        <ul className="divide-y divide-border dark:divide-border-dark">
           {new Array(8).fill(1).map((_, i) => {
             return (
               <li key={i} className="py-3 px-3">
-                <div className="w-full rounded py-3 bg-gray-200 animate-pulse" />
+                <div className="w-full rounded py-3 bg-gray-200 dark:bg-[rgba(255,255,255,.1)] animate-pulse" />
               </li>
             );
           })}
