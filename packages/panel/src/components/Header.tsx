@@ -9,9 +9,18 @@ const Header: React.FC<{ link?: string; children: React.ReactNode }> = ({
         <a
           href={link}
           target="_blank"
-          className="inline-block -rotate-45 opacity-30 hover:opacity-70 px-1 py-0.5"
+          className="inline-block select-none font-semibold text-sm 
+          text-primary/30 
+          dark:text-primary-dark/30 
+          hover:text-primary/60 
+          dark:hover:text-white/50 
+          hover:bg-accent/20 
+          dark:hover:bg-white/20 
+          px-1.5 py-0.5 rounded-sm"
         >
-          →
+          <span className="inline-block -rotate-45">
+            →
+          </span>
         </a>
       ) : null}
     </header>

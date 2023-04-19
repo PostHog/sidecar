@@ -1,10 +1,6 @@
 import { useState, useEffect } from "react";
 
-import expand from "../assets/expand.svg";
-import collapse from "../assets/collapse.svg";
-
-
-import { Collapse, Expand } from "./Icons";
+import { Collapse, Expand, Activity, Profile, Toggle } from "./Icons";
 
 import FeatureFlags, { FeatureFlagsData } from "./FeatureFlags";
 import Section from "./Section";
@@ -201,9 +197,14 @@ const Person: React.FC<{ person: PersonData }> = ({ person }) => {
                   <button
                     className={`${selected
                       ? "text-primary font-bold dark:text-primary-dark bg-primary-dark/20 dark:bg-border-dark"
-                      : "text-primary/75 dark:text-primary-dark/75"
-                      }  px-2 py-1 rounded-sm text-xs h-full relative hover:scale-[1.02] active:top-[0.25px] active:scale-[1.01] hover:border-accent `}
+                      : "text-primary/75 dark:text-primary-dark/75 hover:bg-accent dark:hover:bg-accent-dark"
+                      } inline-flex justify-center gap-1.5 px-2.5 py-2 rounded-sm text-xs h-full relative hover:scale-[1.02] active:top-[0.25px] active:scale-[1.01] hover:border-accent transition-all`}
                   >
+                    <span className="inline-block h-4 w-4 text-primary dark:text-primary-dark"><Activity /></span>
+                    {/*}
+                    <span className="inline-block h-4 w-4 text-primary dark:text-primary-dark"><Profile /></span>
+                    <span className="inline-block h-4 w-4 text-primary dark:text-primary-dark"><Toggle /></span>
+                    */}
                     {tab}
                   </button>
                 )}

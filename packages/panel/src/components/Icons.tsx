@@ -2,12 +2,24 @@ const Icon = ({ children }: { children: React.ReactNode }): JSX.Element => (
     <>{children}</>
 )
 
+export const Activity = ({ className }: { className?: string }): JSX.Element => (
+    <svg viewBox="0 0 14 14" className="fill-current" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.674 6.723H7.428V4.025a.548.548 0 0 0-.54-.54.548.548 0 0 0-.54.54v3.237c0 .292.248.54.54.54h2.786a.53.53 0 0 0 .54-.54.548.548 0 0 0-.54-.54Z" /><path d="M7.02.146C3.242.146.166 3.223.166 7s3.077 6.854 6.854 6.854S13.874 10.777 13.874 7 10.797.146 7.02.146Zm0 12.629c-3.18 0-5.775-2.596-5.775-5.775 0-3.179 2.596-5.775 5.775-5.775 3.178 0 5.775 2.596 5.775 5.775 0 3.179-2.597 5.775-5.775 5.775Z" /></svg>
+)
+
 export const Collapse = ({ className }: { className?: string }): JSX.Element => (
-    <svg fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M7.41016 18.59L8.83016 20L12.0002 16.83L15.1702 20L16.5802 18.59L12.0002 14L7.41016 18.59ZM16.5902 5.41L15.1702 4L12.0002 7.17L8.83016 4L7.41016 5.41L12.0002 10L16.5902 5.41Z" fill="currentColor"></path></svg>
+    <svg fill="none" className="fill-current" xmlns="http://www.w3.org/2000/svg" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M7.41016 18.59L8.83016 20L12.0002 16.83L15.1702 20L16.5802 18.59L12.0002 14L7.41016 18.59ZM16.5902 5.41L15.1702 4L12.0002 7.17L8.83016 4L7.41016 5.41L12.0002 10L16.5902 5.41Z" fill="currentColor"></path></svg>
 )
 
 export const Expand = ({ className }: { className?: string }): JSX.Element => (
-    <svg xmlns="http://www.w3.org/2000/svg" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M12.0002 5.83L15.1702 9L16.5802 7.59L12.0002 3L7.41016 7.59L8.83016 9L12.0002 5.83ZM12.0002 18.17L8.83016 15L7.42016 16.41L12.0002 21L16.5902 16.41L15.1702 15L12.0002 18.17Z" fill="currentColor"></path></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" className="fill-current" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M12.0002 5.83L15.1702 9L16.5802 7.59L12.0002 3L7.41016 7.59L8.83016 9L12.0002 5.83ZM12.0002 18.17L8.83016 15L7.42016 16.41L12.0002 21L16.5902 16.41L15.1702 15L12.0002 18.17Z" fill="currentColor"></path></svg>
+)
+
+export const Toggle = ({ className }: { className?: string }): JSX.Element => (
+    <svg fill="none" className="fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 14"><g clip-path="url(#a)"><path d="M2.952 6.449h8.135a2.94 2.94 0 0 0 2.932-2.933A2.94 2.94 0 0 0 11.087.584H2.952A2.94 2.94 0 0 0 .02 3.515a2.95 2.95 0 0 0 2.932 2.933Zm8.136-4.584c.913 0 1.65.752 1.65 1.65 0 .9-.752 1.651-1.65 1.651-.914 0-1.65-.752-1.65-1.65-.001-.899.735-1.65 1.65-1.65Z" /><path opacity=".5" d="M11.088 7.923H2.952A2.94 2.94 0 0 0 .02 10.855a2.94 2.94 0 0 0 2.932 2.932h8.135a2.94 2.94 0 0 0 2.933-2.932 2.95 2.95 0 0 0-2.932-2.932Zm-8.136 4.583c-.913 0-1.65-.752-1.65-1.65 0-.914.752-1.65 1.65-1.65.914 0 1.65.751 1.65 1.65.001.913-.736 1.65-1.65 1.65Z" /></g><defs><clipPath id="a"><path d="M.02 0h14v14h-14z" /></clipPath></defs></svg>
+)
+
+export const Profile = ({ className }: { className?: string }): JSX.Element => (
+    <svg fill="none" xmlns="http://www.w3.org/2000/svg" className="fill-current" viewBox="0 0 10 14"><path d="M8.61 2.172H6.571v-.774a.817.817 0 0 0-.815-.815H4.603a.817.817 0 0 0-.815.815v.788H1.751A.817.817 0 0 0 .936 3v9.6c0 .45.367.816.815.816h6.858a.817.817 0 0 0 .815-.815V2.987a.808.808 0 0 0-.815-.815Zm0 10.416H1.764V2.987h2.037c.04.421.394.733.815.733H5.77a.812.812 0 0 0 .815-.733h2.037v9.601h-.014Z" /><path d="M6.735 5.948a1.547 1.547 0 1 0-3.096 0c0 .638.394 1.222.992 1.453a2.107 2.107 0 0 0-1.834 2.077v.367a.4.4 0 0 0 .407.407H7.17a.4.4 0 0 0 .408-.407v-.367c0-1.059-.788-1.955-1.834-2.077.598-.231.992-.801.992-1.453ZM7.17 11.067H3.204a.4.4 0 0 0-.407.408.4.4 0 0 0 .407.407H7.17a.4.4 0 0 0 .408-.407.4.4 0 0 0-.407-.408Z" /></svg>
 )
 
 export const SidecarLogo = ({ className }: { className?: string }): JSX.Element => (
