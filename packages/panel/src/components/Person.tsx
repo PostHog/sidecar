@@ -55,7 +55,7 @@ export type Event = {
   timestamp: string;
 };
 
-const tabs = ["Activity", "Profile", "Feature Flags"];
+const tabs = ["Activity", "Profile", "Feature flags"];
 
 const Person: React.FC<{ person: PersonData }> = ({ person }) => {
   const { user } = useUser();
