@@ -64,7 +64,7 @@ const Persons: React.FC<PersonsProps> = (props) => {
     <div
       className={`bg-background dark:bg-background-dark w-full h-full text-primary dark:text-primary-dark flex flex-col border-l shadow-md transform transition-transform`}
     >
-      <div className="px-2 py-2 border-b">
+      <div className="px-2 pt-2">
         <div className="flex justify-between items-center space-x-2 mb-2">
           <div className="flex items-center space-x-2">
             <span className="w-7 h-7 flex items-center">
@@ -95,7 +95,7 @@ const Persons: React.FC<PersonsProps> = (props) => {
           <div className="flex items-center">
             <input
               type="text"
-              className="flex-grow border border-solid border-accent rounded-sm px-2 py-1 text-sm"
+              className="flex-grow border-border dark:border-border-dark border-solid rounded-sm px-2 py-1 text-sm bg-accent dark:bg-accent-dark"
               placeholder="Search users in PostHog..."
               value={query}
               onInput={(event) =>
@@ -124,7 +124,7 @@ const Persons: React.FC<PersonsProps> = (props) => {
           No results
         </div>
       ) : (
-        <ul className="divide-y overflow-y-scroll flex-grow overscroll-y-contain pb-2">
+        <ul className="divide-y overflow-y-scroll divide-border dark:divide-border-dark flex-grow overscroll-y-contain pb-2 scrollbar-thin scrollbar-rounded scrollbar-thumb-[rgba(0,0,0,.4)] hover:scrollbar-thumb-[rgba(0,0,0,.6)] dark:scrollbar-thumb-[rgba(255,255,255,.1)] hover:dark:scrollbar-thumb-[rgba(255,255,255,.2)] scrollbar-thumb-rounded-full scrollbar-track-accent dark:scrollbar-track-accent-dark">
           {persons.map((person) => {
             return (
               <li key={person.id}>
