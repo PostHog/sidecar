@@ -39,7 +39,7 @@ const Configure: React.FC<ConfigureProps> = ({ next }) => {
   const fetchProperties = async () => {
     if (user) {
       const personProperties = await fetch(`${user.url}/api/projects/@current/property_definitions?type=person`, {
-          headers: { Authorization: `Bearer ${user.apiKey}` },
+        headers: { Authorization: `Bearer ${user.apiKey}` },
       }).then(res => res.json());
 
       setDefinitions(personProperties.results);
@@ -55,15 +55,15 @@ const Configure: React.FC<ConfigureProps> = ({ next }) => {
 
         console.log(groupProperties)
         setGroupTypes(groups => [...groups, {
-              ...groupType,
-              properties: groupProperties.results
-          }])
+          ...groupType,
+          properties: groupProperties.results
+        }])
       }
     }
   }
 
   useEffect(() => {
-      fetchProperties()
+    fetchProperties()
   }, [user]);
 
   const handleSubmit = (event: React.FormEvent) => {
@@ -78,7 +78,7 @@ const Configure: React.FC<ConfigureProps> = ({ next }) => {
   };
 
   return (
-    <div className="min-h-full py-16 flex flex-col space-y-6 px-6 bg-light-gray">
+    <div className="min-h-full py-16 flex flex-col space-y-6 px-6 bg-accent dark:bg-accent-dark">
       <div className="space-y-1">
         <h1 className="text-2xl font-bold">
           Which properties are important to you?

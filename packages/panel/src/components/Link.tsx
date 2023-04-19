@@ -1,7 +1,7 @@
 import cntl from "cntl";
 
 const baseLinkStyles = cntl`
-  text-primary
+  text-primary dark:text-primary-dark
 `;
 
 const rowLinkStyles = cntl`
@@ -11,7 +11,7 @@ const rowLinkStyles = cntl`
   py-2
   group
   rounded-sm
-  hover:bg-light-gray
+  bg-accent dark:bg-accent-dark
   relative hover:scale-[1.005] active:top-[0.25px] active:scale-[1] transition-all
 `;
 

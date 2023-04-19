@@ -141,7 +141,7 @@ const Person: React.FC<{ person: PersonData }> = ({ person }) => {
 
   return user ? (
     <div key={person.id} className="pb-2">
-      <div className="flex items-center space-x-2 py-2 px-3 cursor-pointer hover:bg-light-gray relative transition-all hover:scale-[1.01] active:top-[0.5px] active:scale-[1]">
+      <div className="flex items-center space-x-2 py-2 px-3 cursor-pointer bg-accent dark:bg-accent-dark relative transition-all hover:scale-[1.01] active:top-[0.5px] active:scale-[1]">
         <button
           className="shrink-0 hover:bg-accent/5 active:bg-accent/10 rounded p-1"
           onClick={() => setExpanded((expanded) => !expanded)}
@@ -181,16 +181,15 @@ const Person: React.FC<{ person: PersonData }> = ({ person }) => {
 
       {expanded && (
         <Tab.Group>
-          <Tab.List className="grid grid-cols-3 items-center border-b mx-2 mb-2 space-x-[2px]">
+          <Tab.List className="items-center mx-2 mb-2 space-x-[2px]">
             {tabs.map((tab) => (
               <Tab key={tab} as={React.Fragment}>
                 {({ selected }) => (
                   <button
-                    className={`${
-                      selected
-                        ? "text-primary border-b-2 font-semibold !border-primary py-3"
-                        : ""
-                    } text-sm h-full relative hover:scale-[1.02] active:top-[0.25px] active:scale-[1.01] border-b-2 border-transparent hover:border-accent border-solid focus-visible:outline-0`}
+                    className={`${selected
+                      ? "text-primary dark:text-primary-dark bg-primary-dark/20 dark:bg-primary-light/20"
+                      : "text-primary/75 dark:text-primary-dark/75"
+                      }  px-2 py-1 rounded-sm text-sm h-full relative hover:scale-[1.02] active:top-[0.25px] active:scale-[1.01] hover:border-accent -focus-visible:outline-0`}
                   >
                     {tab}
                   </button>
@@ -231,7 +230,7 @@ const Person: React.FC<{ person: PersonData }> = ({ person }) => {
                               </span>
                             </span>
 
-                            <span className="block text-gray-800 text-xs">
+                            <span className="block text-primary/40 dark:text-primary-dark/40 text-xs">
                               {formattedDuration}
                             </span>
                           </div>
@@ -250,7 +249,7 @@ const Person: React.FC<{ person: PersonData }> = ({ person }) => {
                       <ListItem key={event.id} event>
                         <Event>
                           <div className="w-full flex items-center justify-between">
-                            <span className="font-code">{event.event}</span>
+                            <span className="">{event.event}</span>
                             <span>
                               {humanFriendlyDetailedTime(
                                 event.timestamp,

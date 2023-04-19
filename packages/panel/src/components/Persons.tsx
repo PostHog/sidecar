@@ -62,7 +62,7 @@ const Persons: React.FC<PersonsProps> = (props) => {
 
   return (
     <div
-      className={`w-full h-full flex flex-col border-l shadow-md transform transition-transform bg-light-gray`}
+      className={`bg-background dark:bg-background-dark w-full h-full text-primary dark:text-primary-dark flex flex-col border-l shadow-md transform transition-transform`}
     >
       <div className="px-2 py-2 border-b">
         <div className="flex justify-between items-center space-x-2 mb-2">

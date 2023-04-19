@@ -4,7 +4,8 @@ const baseStyles = cntl`
   text-sm
   border-t 
   border-solid 
-  border-light-gray
+  border-border
+  border-border-dark
   first:border-t-0
   mt-[1px]
   first:mt-0
