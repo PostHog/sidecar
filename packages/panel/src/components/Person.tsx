@@ -144,7 +144,7 @@ const Person: React.FC<{ person: PersonData }> = ({ person }) => {
 
   return user ? (
     <div key={person.id} className="pb-2">
-      <div className="flex items-center space-x-2 py-2 px-3 cursor-pointer bg-accent dark:bg-background-dark relative transition-all hover:scale-[1.005] active:top-[0.5px] active:scale-[1]">
+      <div className="flex items-center space-x-2 py-2 px-1 cursor-pointer bg-accent dark:bg-background-dark relative transition-all hover:scale-[1.005] active:top-[0.5px] active:scale-[1]">
         <button
           className="shrink-0 leading-none hover:bg-accent/25 active:bg-primary-dark/25 rounded p-1 text-primary dark:text-primary-dark"
           onClick={() => setExpanded((expanded) => !expanded)}
@@ -194,7 +194,7 @@ const Person: React.FC<{ person: PersonData }> = ({ person }) => {
                     className={`${selected
                       ? "text-primary dark:text-primary-dark bg-primary-dark/20 dark:bg-primary-light/20"
                       : "text-primary/75 dark:text-primary-dark/75"
-                      }  px-2 py-1 rounded-sm text-sm h-full relative hover:scale-[1.02] active:top-[0.25px] active:scale-[1.01] hover:border-accent -focus-visible:outline-0`}
+                      }  px-2 py-1 rounded-sm text-sm h-full relative hover:scale-[1.02] active:top-[0.25px] active:scale-[1.01] hover:border-accent `}
                   >
                     {tab}
                   </button>
