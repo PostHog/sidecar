@@ -58,7 +58,7 @@ const Login: React.FC<LoginProps> = ({ next }) => {
   };
 
   return (
-    <div className="h-full px-6 flex flex-col justify-center bg-accent dark:bg-accent-dark">
+    <div className="h-full px-6 flex flex-col justify-center bg-accent dark:bg-accent-dark text-primary dark:text-primary-dark">
       <form onSubmit={handleSubmit} className="space-y-12">
         <div className="space-y-2">
           <SidecarLogo className="h-20 mb-4" />
@@ -76,14 +76,14 @@ const Login: React.FC<LoginProps> = ({ next }) => {
           <div>
             <label
               htmlFor="location"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium opacity-50"
             >
               Where do you run PostHog?
             </label>
             <select
               id="location"
               name="location"
-              className="mt-1 block w-full rounded-sm border-gray-300 py-2 pl-3 pr-10 text-base focus:border-primary focus:outline-none focus:ring-primary sm:text-sm"
+              className="mt-1 block w-full rounded-sm text-primary py-2 pl-3 pr-10 text-base focus:border-primary focus:outline-none focus:ring-primary sm:text-sm"
               defaultValue="cloud-us"
               onChange={(event) => setLocation(event.target.value)}
             >
@@ -97,13 +97,13 @@ const Login: React.FC<LoginProps> = ({ next }) => {
             <div>
               <label
                 htmlFor="host"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium opacity-50"
               >
                 Your PostHog Host
               </label>
               <div className="relative mt-1 rounded-sm shadow-sm">
                 <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                  <span className="text-gray-500 sm:text-sm">https://</span>
+                  <span className="opacity-70 sm:text-sm">https://</span>
                 </div>
                 <input
                   type="text"
@@ -120,7 +120,7 @@ const Login: React.FC<LoginProps> = ({ next }) => {
           <div>
             <label
               htmlFor="api-key"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium opacity-50"
             >
               Your Personal API Key
             </label>
@@ -129,28 +129,19 @@ const Login: React.FC<LoginProps> = ({ next }) => {
                 type="text"
                 name="api-key"
                 id="api-key"
-                className="block w-full rounded-sm border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm"
+                className="block w-full rounded-sm text-primary border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm"
                 onChange={(event) => setApiKey(event.target.value)}
                 placeholder=""
               />
             </div>
-            <p className="mt-2 text-sm text-gray-500" id="email-description">
-              Get one at{" "}. You may need to disable adblockers for validation to work.
-              {location === "self-hosted" ? (
-                <Link
-                  to={`https://${host}/me/settings#personal-api-keys`}
-                  external
-                >
-                  https://{host || "your-posthog-host"}/me/settings
-                </Link>
-              ) : (
-                <Link
-                  to="https://app.posthog.com/me/settings#personal-api-key"
-                  external
-                >
-                  https://app.posthog.com/me/settings
-                </Link>
-              )}
+            <p className="mt-2 text-sm opacity-70" id="email-description">
+              Get one at
+              <Link
+                to="https://app.posthog.com/me/settings#personal-api-key"
+                external
+                className="inline-flex w-auto"
+              >https://app.posthog.com/me/settings</Link>. (You may need to disable adblockers for validation to work.)
+
             </p>
           </div>
         </div>
@@ -164,15 +155,16 @@ const Login: React.FC<LoginProps> = ({ next }) => {
 
           <button
             disabled={!(location && host && apiKey)}
-            className="bg-primary rounded w-full py-2 text-white disabled:bg-blue-200 relative hover:scale-[1.005] active:top-[0.25px] active:scale-[1] transition-all font-bold text-[15px]"
+            className="border-[1.5px] w-full rounded-sm px-4 py-2.5 text-[15px] font-bold relative bg-red text-white border-red shadow-xl hover:scale-[1.01] hover:top-[-.5px] active:top-[0px] active:scale-[1]"
           >
             Next
           </button>
 
-          <p className="text-sm font-semibold text-center mt-3">
+          <p className="text-sm font-semibold mt-3">
             <Link
               to="https://posthog.com?utm_source=sidecar-extension"
               external
+              className="justify-center items-center py-3"
             >
               New to PostHog?
             </Link>

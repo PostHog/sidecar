@@ -30,6 +30,7 @@ const rowLinkStyles = cntl`
 type Props = {
   to: string;
   className?: string;
+  title?: string;
   external?: boolean;
   children: React.ReactNode;
 } & any;
@@ -37,7 +38,8 @@ type Props = {
 const Link: React.FC<Props> = ({
   to,
   external,
-  classes,
+  className,
+  title,
   flag,
   recording,
   event,
@@ -47,7 +49,8 @@ const Link: React.FC<Props> = ({
     <a
       href={to}
       target={external ? "_blank" : undefined}
-      className={`${baseLinkStyles} ${rowLinkStyles} ${classes}`}
+      className={`${baseLinkStyles} ${rowLinkStyles} ${className}`}
+      title={title}
     >
       {children}
     </a>
@@ -55,7 +58,8 @@ const Link: React.FC<Props> = ({
     <a
       href={to}
       target={external ? "_blank" : undefined}
-      className={`${baseLinkStyles} ${rowLinkStyles} ${classes}`}
+      className={`${baseLinkStyles} ${rowLinkStyles} ${className}`}
+      title={title}
     >
       {children}
     </a>
@@ -63,7 +67,8 @@ const Link: React.FC<Props> = ({
     <a
       href={to}
       target={external ? "_blank" : undefined}
-      className={`${baseLinkStyles} ${rowLinkStyles} ${classes}`}
+      className={`${baseLinkStyles} ${rowLinkStyles} ${className}`}
+      title={title}
     >
       {children}
     </a>
@@ -71,7 +76,8 @@ const Link: React.FC<Props> = ({
     <a
       href={to}
       target={external ? "_blank" : undefined}
-      className={`${rowLinkStyles} ${classes}`}
+      className={`${rowLinkStyles} ${className}`}
+      title={title}
     >
       {children}
     </a>

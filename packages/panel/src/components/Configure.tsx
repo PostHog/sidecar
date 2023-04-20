@@ -78,12 +78,12 @@ const Configure: React.FC<ConfigureProps> = ({ next }) => {
   };
 
   return (
-    <div className="min-h-full py-16 flex flex-col space-y-6 px-6 bg-accent dark:bg-accent-dark">
+    <div className="min-h-full py-16 flex flex-col space-y-6 px-6 bg-accent dark:bg-accent-dark text-primary dark:text-primary-dark">
       <div className="space-y-1">
         <h1 className="text-2xl font-bold">
           Which properties are important to you?
         </h1>
-        <p className="text-black/70">
+        <p className="opacity-70">
           Just choose the ones with helpful context when talking to customers.
           (You can change these later.)
         </p>
@@ -130,7 +130,7 @@ const Configure: React.FC<ConfigureProps> = ({ next }) => {
 
         <button
           type="submit"
-          className="bg-primary rounded w-full py-2 text-white text-[15px] disabled:bg-blue-200 mt-10 font-bold box-border relative hover:scale-[1.005] active:top-[0.5px] active:scale-[1]"
+          className="border-[1.5px] w-full rounded-sm px-4 py-2.5 text-[15px] font-bold relative bg-red text-white border-red shadow-xl hover:scale-[1.01] hover:top-[-.5px] active:top-[0px] active:scale-[1]"
         >
           Save &amp; launch PostHog Sidecar &nbsp;🚀
         </button>
