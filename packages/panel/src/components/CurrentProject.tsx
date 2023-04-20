@@ -23,7 +23,7 @@ const CurrentProject = () => {
   }, [user]);
 
   return loading ? (
-    <div className="w-48 py-2 bg-gray-300 animate-pulse"></div>
+    <div className="w-48 py-2 animate-pulse bg-gray-200 dark:bg-[rgba(255,255,255,.1)]"></div>
   ) : (
     <span>{currentProject}</span>
   );

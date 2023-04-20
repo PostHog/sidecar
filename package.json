@@ -3,7 +3,7 @@
   "workspaces": [
     "./packages/*"
   ],
-  "packageManager": "yarn@3.2.4",
+  "packageManager": "yarn@3.5.0",
   "devDependencies": {
     "@types/chrome": "^0.0.200"
   }

@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 
-import expand from "../assets/expand.svg";
-import collapse from "../assets/collapse.svg";
+import { Collapse, Expand, Activity, Profile, Toggle, Play } from "./Icons";
 
 import FeatureFlags, { FeatureFlagsData } from "./FeatureFlags";
 import Section from "./Section";
@@ -56,7 +55,11 @@ export type Event = {
   timestamp: string;
 };
 
-const tabs = ["Activity", "Profile", "Feature Flags"];
+const tabs = [
+  {title: "Activity", icon: Activity },
+  {title: "Profile", icon: Profile },
+  { title: "Feature flags", icon: Toggle }
+];
 
 const Person: React.FC<{ person: PersonData }> = ({ person }) => {
   const { user } = useUser();
@@ -141,12 +144,14 @@ const Person: React.FC<{ person: PersonData }> = ({ person }) => {
 
   return user ? (
     <div key={person.id} className="pb-2">
-      <div className="flex items-center space-x-2 py-2 px-3 cursor-pointer hover:bg-light-gray relative transition-all hover:scale-[1.01] active:top-[0.5px] active:scale-[1]">
+      <div className="flex items-center space-x-2 py-2 px-1 cursor-pointer bg-background dark:bg-background-dark relative transition-all hover:scale-[1.005] active:top-[0.5px] active:scale-[1]">
         <button
-          className="shrink-0 hover:bg-accent/5 active:bg-accent/10 rounded p-1"
+          className="shrink-0 leading-none hover:bg-accent/25 active:bg-primary-dark/25 rounded p-1 text-primary dark:text-primary-dark"
           onClick={() => setExpanded((expanded) => !expanded)}
         >
-          <img src={expanded ? collapse : expand} className="w-6 h-6" />
+          <span className="inline-block w-6 h-6 text-primary dark:text-primary-dark">
+            {expanded ? <Collapse /> : <Expand />}
+          </span>
           <span className="sr-only">Expand person</span>
         </button>
         <div
@@ -157,7 +162,15 @@ const Person: React.FC<{ person: PersonData }> = ({ person }) => {
 
           <a
             href={`${user.url}/person/${person.distinct_ids[0]}`}
-            className="font-semibold text-sm ml-0.5 mt-1 text-black/30 hover:text-black/60 p-0.5 hover:bg-accent/20 rounded-sm"
+            className="font-semibold text-sm ml-0.5 mt-1 
+            text-primary/30 
+            dark:text-primary-dark/30 
+            hover:text-primary/60 
+            dark:hover:text-white/50 
+            hover:bg-primary/5 
+            dark:hover:bg-white/20 
+            px-1 py-0.5 rounded-sm"
+            target="_blank"
           >
             <span className="inline-block -rotate-45">→</span>
           </a>
@@ -166,9 +179,9 @@ const Person: React.FC<{ person: PersonData }> = ({ person }) => {
             {person.distinct_ids[0]}
           </p>
 
-          <div className="text-xs opacity-40 text-black">
+          <div className="text-xs text-primary/40 dark:text-primary-dark/40">
             First seen:{" "}
-            <time className="text-gray-800" dateTime={person.created_at}>
+            <time className="" dateTime={person.created_at}>
               {humanFriendlyDetailedTime(
                 person.created_at,
                 "MMMM DD, YYYY",
@@ -181,18 +194,18 @@ const Person: React.FC<{ person: PersonData }> = ({ person }) => {
 
       {expanded && (
         <Tab.Group>
-          <Tab.List className="grid grid-cols-3 items-center border-b mx-2 mb-2 space-x-[2px]">
+          <Tab.List className="items-center mx-2 mb-2 space-x-[2px]">
             {tabs.map((tab) => (
-              <Tab key={tab} as={React.Fragment}>
+              <Tab key={tab.title} as={React.Fragment}>
                 {({ selected }) => (
                   <button
-                    className={`${
-                      selected
-                        ? "text-primary border-b-2 font-semibold !border-primary py-3"
-                        : ""
-                    } text-sm h-full relative hover:scale-[1.02] active:top-[0.25px] active:scale-[1.01] border-b-2 border-transparent hover:border-accent border-solid focus-visible:outline-0`}
+                    className={`${selected
+                      ? "text-primary font-bold dark:text-primary-dark bg-primary/5 dark:bg-primary-dark/20 dark:bg-border-dark"
+                      : "text-primary/75 dark:text-primary-dark/75 hover:bg-primary/5 dark:hover:bg-accent-dark"
+                      } inline-flex items-center justify-center gap-1.5 px-2.5 py-2 rounded-sm text-xs h-full relative hover:scale-[1.02] active:top-[0px] active:scale-[1.01] hover:border-accent transition-all`}
                   >
-                    {tab}
+                    <tab.icon className="h-4 w-4 inline-block text-primary dark:text-primary-dark"/>
+                    <span className="inline-block">{tab.title}</span>
                   </button>
                 )}
               </Tab>
@@ -219,19 +232,22 @@ const Person: React.FC<{ person: PersonData }> = ({ person }) => {
                           recording
                           external
                         >
-                          <div className="w-full flex items-center justify-between">
-                            <span>
-                              {humanFriendlyDetailedTime(
-                                recording.start_time,
-                                "MMMM DD, YYYY",
-                                "h:mm A"
-                              )}
-                              <span className="hidden leading-none group-hover:inline-block -rotate-45 opacity-50 px-1 py-0.5">
-                                →
+                          <div className="w-full flex items-center justify-between py-1">
+                            <div className="flex items-center gap-1.5 group">
+                              <span className="inline-block w-4 h-4 text-primary dark:text-primary-dark opacity-30 group-hover:opacity-75"><Play /></span>
+                              <span className="text-xs">
+                                {humanFriendlyDetailedTime(
+                                  recording.start_time,
+                                  "MMMM DD, YYYY",
+                                  "h:mm A"
+                                )}
+                                <span className="hidden leading-none group-hover:inline-block -rotate-45 opacity-50 px-1 py-0.5">
+                                  →
+                                </span>
                               </span>
-                            </span>
+                            </div>
 
-                            <span className="block text-gray-800 text-xs">
+                            <span className="block text-primary/40 dark:text-primary-dark/40 text-xs">
                               {formattedDuration}
                             </span>
                           </div>
@@ -250,7 +266,7 @@ const Person: React.FC<{ person: PersonData }> = ({ person }) => {
                       <ListItem key={event.id} event>
                         <Event>
                           <div className="w-full flex items-center justify-between">
-                            <span className="font-code">{event.event}</span>
+                            <span className="">{event.event}</span>
                             <span>
                               {humanFriendlyDetailedTime(
                                 event.timestamp,
@@ -300,18 +316,19 @@ const Person: React.FC<{ person: PersonData }> = ({ person }) => {
                       </Header>
                       <List>
                         <ListItem>
-                          <div className="w-full flex flex-col items-stretch">
-                            <div className="w-full flex items-center justify-between border-b py-1 text-sm">
+                          <div className="w-full flex flex-col items-stretch px-1 divide-y divide-solid divide-border dark:divide-border-dark">
+                            <div className="w-full flex items-center justify-between py-1 text-sm">
                               <Link
                                 external
                                 to={`${user.url}/groups/${group.group_type_index}/${group.id}`}
+
                               >
                                 {group.properties?.name || group.id}
                               </Link>
                             </div>
 
-                            {user.groupProps?.[group.group_type_index] ? (
-                              <ul className="w-full pb-1">
+                            {user.groupProps?.[group.group_type_index] && (
+                              <ul className="w-full p-1 empty:hidden">
                                 {Object.entries(group.properties)
                                   .filter(
                                     ([key]) =>
@@ -336,7 +353,7 @@ const Person: React.FC<{ person: PersonData }> = ({ person }) => {
                                     );
                                   })}
                               </ul>
-                            ) : null}
+                            )}
                           </div>
                         </ListItem>
                       </List>

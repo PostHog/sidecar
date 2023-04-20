@@ -5,9 +5,8 @@ import { useUser } from "./UserProvider";
 import Person, { PersonData } from "./Person";
 import Link from "./Link";
 import CurrentProject from "./CurrentProject";
-import { PostHogLogomark } from "./Icons";
+import { PostHogLogomark, Settings } from "./Icons";
 
-import { Cog6ToothIcon } from "@heroicons/react/24/outline";
 
 type PersonsProps = {
   setScreen: (screen: string) => void;
@@ -62,9 +61,9 @@ const Persons: React.FC<PersonsProps> = (props) => {
 
   return (
     <div
-      className={`w-full h-full flex flex-col border-l shadow-md transform transition-transform bg-light-gray`}
+      className={`bg-background dark:bg-background-dark w-full h-full text-primary dark:text-primary-dark flex flex-col border-l border-border dark:border-border-dark shadow-md transform transition-transform`}
     >
-      <div className="px-2 py-2 border-b">
+      <div className="px-2 pt-2">
         <div className="flex justify-between items-center space-x-2 mb-2">
           <div className="flex items-center space-x-2">
             <span className="w-7 h-7 flex items-center">
@@ -74,19 +73,18 @@ const Persons: React.FC<PersonsProps> = (props) => {
               <CurrentProject />
             </span>
           </div>
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-1">
             {user && (
               <Link
                 to={`${user.url}/persons?search=${query}`}
                 external
-                classes="text-xs text-black bg-accent/5 hover:bg-accent/10 active:bg-accent/20 p-1.5 rounded-full leading-none group"
+                classes="text-xs items-center text-primary/60 hover:text-primary/75 dark:text-primary-dark/60 hover:dark:text-primary-dark/75 bg-accent/5 hover:bg-accent/10 active:bg-accent/20 py-1 px-2 rounded-full leading-none group"
               >
                 Open in PostHog
-                <span className="opacity-50 group-hover:opacity-75">→</span>
               </Link>
             )}
-            <button onClick={() => props.setScreen("configure")}>
-              <Cog6ToothIcon className="w-5 h-5 text-gray-600" />
+            <button onClick={() => props.setScreen("configure")} className="group flex items-center justify-center leading-none p-1.5 rounded-sm hover:bg-primary/20 dark:hover:bg-primary-dark/20">
+              <span className="inline-block w-4 h-4 text-primary/30 dark:text-primary-dark/30 group-hover:text-primary/60 group-hover:dark:text-primary-dark/60"><Settings /></span>
             </button>
           </div>
         </div>
@@ -95,7 +93,7 @@ const Persons: React.FC<PersonsProps> = (props) => {
           <div className="flex items-center">
             <input
               type="text"
-              className="flex-grow border border-solid border-accent rounded-sm px-2 py-1 text-sm"
+              className="flex-grow border-border dark:border-border-dark border-solid rounded-sm px-2 py-1 text-sm bg-accent dark:bg-accent-dark"
               placeholder="Search users in PostHog..."
               value={query}
               onInput={(event) =>
@@ -110,11 +108,11 @@ const Persons: React.FC<PersonsProps> = (props) => {
       </div>
 
       {loading ? (
-        <ul className="divide-y">
+        <ul className="divide-y divide-border dark:divide-border-dark">
           {new Array(8).fill(1).map((_, i) => {
             return (
               <li key={i} className="py-3 px-3">
-                <div className="w-full rounded py-3 bg-gray-200 animate-pulse" />
+                <div className="w-full rounded py-3 bg-gray-200 dark:bg-[rgba(255,255,255,.1)] animate-pulse" />
               </li>
             );
           })}
@@ -124,7 +122,7 @@ const Persons: React.FC<PersonsProps> = (props) => {
           No results
         </div>
       ) : (
-        <ul className="divide-y overflow-y-scroll flex-grow overscroll-y-contain pb-2">
+        <ul className="divide-y overflow-y-scroll divide-border dark:divide-border-dark flex-grow overscroll-y-contain pb-2 scrollbar-thin scrollbar-rounded scrollbar-thumb-[rgba(0,0,0,.4)] hover:scrollbar-thumb-[rgba(0,0,0,.6)] dark:scrollbar-thumb-[rgba(255,255,255,.1)] hover:dark:scrollbar-thumb-[rgba(255,255,255,.2)] scrollbar-thumb-rounded-full scrollbar-track-accent dark:scrollbar-track-accent-dark">
           {persons.map((person) => {
             return (
               <li key={person.id}>

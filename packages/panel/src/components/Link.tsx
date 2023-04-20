@@ -1,18 +1,30 @@
 import cntl from "cntl";
 
 const baseLinkStyles = cntl`
-  text-primary
+  text-primary dark:text-primary-dark
 `;
 
 const rowLinkStyles = cntl`
   flex
   w-full
   px-1
-  py-2
+  py-1
   group
   rounded-sm
-  hover:bg-light-gray
-  relative hover:scale-[1.005] active:top-[0.25px] active:scale-[1] transition-all
+  font-medium
+  bg-accent dark:bg-accent-dark hover:bg-border/20 dark:hover:bg-[rgba(255,255,255,.1)]
+  relative hover:scale-[1.005] active:top-[0px] active:scale-[1] 
+
+  after:font-semibold
+  after:text-sm
+  after:ml-0.5
+  after:text-primary/30
+  after:dark:text-primary-dark/30
+  after:hover:text-primary/60
+  after:dark:hover:text-white/50
+  after:rounded-sm
+  after:content-["→"]
+  after:-rotate-45
 `;
 
 type Props = {
@@ -59,7 +71,7 @@ const Link: React.FC<Props> = ({
     <a
       href={to}
       target={external ? "_blank" : undefined}
-      className={`${baseLinkStyles} ${classes}`}
+      className={`${rowLinkStyles} ${classes}`}
     >
       {children}
     </a>

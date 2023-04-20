@@ -58,7 +58,7 @@ const Login: React.FC<LoginProps> = ({ next }) => {
   };
 
   return (
-    <div className="h-full px-6 flex flex-col justify-center bg-light-gray">
+    <div className="h-full px-6 flex flex-col justify-center bg-accent dark:bg-accent-dark">
       <form onSubmit={handleSubmit} className="space-y-12">
         <div className="space-y-2">
           <SidecarLogo className="h-20 mb-4" />
@@ -135,7 +135,7 @@ const Login: React.FC<LoginProps> = ({ next }) => {
               />
             </div>
             <p className="mt-2 text-sm text-gray-500" id="email-description">
-              Get one at{" "}. You may need to disable adblockers for validation to work. 
+              Get one at{" "}. You may need to disable adblockers for validation to work.
               {location === "self-hosted" ? (
                 <Link
                   to={`https://${host}/me/settings#personal-api-keys`}

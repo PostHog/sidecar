@@ -7,8 +7,17 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'accent': 'rgba(0,0,0,.15)',
-        'primary': '#1D4AFF'
+        'background': '#F3F4F0',
+        'background-dark': '#151619',
+        'border': '#D0D1C9',
+        'border-dark': '#2B2C32',
+        'accent': '#FFFFFD',
+        'accent-dark': '#1D1F27',
+        'primary': '#000',
+        'primary-dark': '#fff',
+
+        'green': '#45C93D',
+        'red': '#F54E00',
       },
       backgroundColor: {
         'light-gray': '#fafaf9',
@@ -18,5 +27,8 @@ module.exports = {
       }
     },
   },
-  plugins: [require("@tailwindcss/forms")],
+  plugins: [
+    require("@tailwindcss/forms"),
+    require("tailwind-scrollbar")({ nocompatible: true })
+  ]
 }
