@@ -32,7 +32,7 @@ function TaxonomicFilter<T>(props: TaxonomicFilterProps<T>) {
         onChange={(selected) => props.onChange(selected)}
         multiple
       >
-        <Combobox.Label className="block text-sm mb-1 font-medium text-gray-700">
+        <Combobox.Label className="block text-sm mb-1 font-medium opacity-50">
           {props.label}
         </Combobox.Label>
         <ul className="relative leading-none">
@@ -43,7 +43,7 @@ function TaxonomicFilter<T>(props: TaxonomicFilterProps<T>) {
               return (
                 <li
                   key={props.displayValue(value)}
-                  className="font-code text-xs inline-block bg-accent/5 rounded-sm p-0.5 mr-1 mb-1"
+                  className="font-code text-xs inline-block bg-accent/5 dark:bg-white/10 rounded-sm p-0.5 mr-1 mb-1"
                 >
                   {props.displayValue(value)}
                 </li>

@@ -56,8 +56,8 @@ export type Event = {
 };
 
 const tabs = [
-  {title: "Activity", icon: Activity },
-  {title: "Profile", icon: Profile },
+  { title: "Activity", icon: Activity },
+  { title: "Profile", icon: Profile },
   { title: "Feature flags", icon: Toggle }
 ];
 
@@ -204,7 +204,7 @@ const Person: React.FC<{ person: PersonData }> = ({ person }) => {
                       : "text-primary/75 dark:text-primary-dark/75 hover:bg-primary/5 dark:hover:bg-accent-dark"
                       } inline-flex items-center justify-center gap-1.5 px-2.5 py-2 rounded-sm text-xs h-full relative hover:scale-[1.02] active:top-[0px] active:scale-[1.01] hover:border-accent transition-all`}
                   >
-                    <tab.icon className="h-4 w-4 inline-block text-primary dark:text-primary-dark"/>
+                    <tab.icon className="h-4 w-4 inline-block text-primary dark:text-primary-dark" />
                     <span className="inline-block">{tab.title}</span>
                   </button>
                 )}
@@ -266,8 +266,8 @@ const Person: React.FC<{ person: PersonData }> = ({ person }) => {
                       <ListItem key={event.id} event>
                         <Event>
                           <div className="w-full flex items-center justify-between">
-                            <span className="">{event.event}</span>
-                            <span>
+                            <span>{event.event}</span>
+                            <span className="text-right opacity-60">
                               {humanFriendlyDetailedTime(
                                 event.timestamp,
                                 "MMMM DD, YYYY",

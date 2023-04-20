@@ -79,8 +79,9 @@ const Persons: React.FC<PersonsProps> = (props) => {
                 to={`${user.url}/persons?search=${query}`}
                 external
                 classes="text-xs items-center text-primary/60 hover:text-primary/75 dark:text-primary-dark/60 hover:dark:text-primary-dark/75 bg-accent/5 hover:bg-accent/10 active:bg-accent/20 py-1 px-2 rounded-full leading-none group"
+                title="Open in PostHog"
               >
-                Open in PostHog
+                Open
               </Link>
             )}
             <button onClick={() => props.setScreen("configure")} className="group flex items-center justify-center leading-none p-1.5 rounded-sm hover:bg-primary/20 dark:hover:bg-primary-dark/20">
