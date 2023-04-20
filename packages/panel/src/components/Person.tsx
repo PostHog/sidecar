@@ -55,7 +55,11 @@ export type Event = {
   timestamp: string;
 };
 
-const tabs = ["Activity", "Profile", "Feature flags"];
+const tabs = [
+  {title: "Activity", icon: Activity },
+  {title: "Profile", icon: Profile },
+  { title: "Feature flags", icon: Toggle }
+];
 
 const Person: React.FC<{ person: PersonData }> = ({ person }) => {
   const { user } = useUser();
@@ -192,20 +196,16 @@ const Person: React.FC<{ person: PersonData }> = ({ person }) => {
         <Tab.Group>
           <Tab.List className="items-center mx-2 mb-2 space-x-[2px]">
             {tabs.map((tab) => (
-              <Tab key={tab} as={React.Fragment}>
+              <Tab key={tab.title} as={React.Fragment}>
                 {({ selected }) => (
                   <button
                     className={`${selected
                       ? "text-primary font-bold dark:text-primary-dark bg-primary/5 dark:bg-primary-dark/20 dark:bg-border-dark"
                       : "text-primary/75 dark:text-primary-dark/75 hover:bg-primary/5 dark:hover:bg-accent-dark"
-                      } inline-flex justify-center gap-1.5 px-2.5 py-2 rounded-sm text-xs h-full relative hover:scale-[1.02] active:top-[0px] active:scale-[1.01] hover:border-accent transition-all`}
+                      } inline-flex items-center justify-center gap-1.5 px-2.5 py-2 rounded-sm text-xs h-full relative hover:scale-[1.02] active:top-[0px] active:scale-[1.01] hover:border-accent transition-all`}
                   >
-                    <span className="inline-block h-4 w-4 text-primary dark:text-primary-dark"><Activity /></span>
-                    {/*}
-                    <span className="inline-block h-4 w-4 text-primary dark:text-primary-dark"><Profile /></span>
-                    <span className="inline-block h-4 w-4 text-primary dark:text-primary-dark"><Toggle /></span>
-                    */}
-                    {tab}
+                    <tab.icon className="h-4 w-4 inline-block text-primary dark:text-primary-dark"/>
+                    <span className="inline-block">{tab.title}</span>
                   </button>
                 )}
               </Tab>

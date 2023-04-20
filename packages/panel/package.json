@@ -11,6 +11,7 @@
   "dependencies": {
     "@headlessui/react": "^1.7.4",
     "@heroicons/react": "^2.0.13",
+    "clsx": "^1.2.1",
     "cntl": "^1.0.0",
     "dayjs": "^1.11.6",
     "kea": "^3.0.4",
