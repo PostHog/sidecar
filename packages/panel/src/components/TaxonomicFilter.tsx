@@ -54,7 +54,7 @@ function TaxonomicFilter<T>(props: TaxonomicFilterProps<T>) {
         <div className="relative mt-1">
           <Combobox.Button className="w-full">
             <Combobox.Input
-              className="w-full rounded-sm border border-gray-300 bg-white py-2 pl-3 pr-10 shadow-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary sm:text-sm text-sm"
+              className="w-full rounded-sm border border-gray-300 bg-white py-2 pl-3 pr-10 shadow-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary sm:text-sm text-sm text-primary"
               onChange={(event) => setQuery(event.target.value)}
               placeholder={props.placeholder}
             />
