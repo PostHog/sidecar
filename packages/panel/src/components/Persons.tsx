@@ -66,10 +66,10 @@ const Persons: React.FC<PersonsProps> = (props) => {
       <div className="px-2 pt-2">
         <div className="flex justify-between items-center space-x-2 mb-2">
           <div className="flex items-center space-x-2">
-            <span className="w-7 h-7 flex items-center">
+            <span className="w-5 h-5 flex items-center">
               <PostHogLogomark />
             </span>
-            <span className="font-semibold opacity-75 text-sm">
+            <span className="font-semibold opacity-75 text-xs">
               <CurrentProject />
             </span>
           </div>
@@ -78,10 +78,10 @@ const Persons: React.FC<PersonsProps> = (props) => {
               <Link
                 to={`${user.url}/persons?search=${query}`}
                 external
-                classes="text-xs items-center text-primary/60 hover:text-primary/75 dark:text-primary-dark/60 hover:dark:text-primary-dark/75 bg-accent/5 hover:bg-accent/10 active:bg-accent/20 py-1 px-2 rounded-full leading-none group"
+                className="!text-xs items-center text-primary/60 hover:text-primary/75 dark:text-primary-dark/60 hover:dark:text-primary-dark/75 bg-accent/5 hover:bg-accent/10 active:bg-accent/20 py-1 px-2 rounded-full leading-none group"
                 title="Open in PostHog"
               >
-                Open
+                Open in PostHog
               </Link>
             )}
             <button onClick={() => props.setScreen("configure")} className="group flex items-center justify-center leading-none p-1.5 rounded-sm hover:bg-primary/20 dark:hover:bg-primary-dark/20">
