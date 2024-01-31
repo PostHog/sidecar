@@ -14,7 +14,7 @@
 - Access user data from PostHog in any other SaaS tool, no integration required
 
 ## Get started for free
-- Join the PostHog Slack group [to download the zip](https://posthogusers.slack.com/archives/C049QQ1BN04/p1667674709511729) and unzip it
+- Contact PostHog to get the file, via [our community](https://posthog.com/questions)
 - Open [the Extensions menu in Chrome](chrome://extensions/), enable Developer Mode 
 - Choose 'Load unpacked extension' and point to the unzipped files
 - Select any email address you find on the internet and right click > "Look this up in PostHog"
@@ -22,7 +22,7 @@
 - Click out of the sidebar area to close it
 
 ## Feedback? Yes, please. 
-Sidecar is a PostHog hackathon project under active, rapid development. Expect rough edges and please share feedback generously via the #website-and-docs channel in [the PostHog Slack group](posthog.com/slack). 
+Sidecar is a PostHog hackathon project under active, rapid development. Expect rough edges and please share feedback generously via the #website-and-docs channel in [our community](https://posthog.com/questions). 
 
 If you find bugs, [please create an issue](https://github.com/PostHog/sidecar/issues). **We give merch and other rewards for good feedback and contributed PRs.**
 
